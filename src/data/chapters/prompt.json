@@ -278,5 +278,285 @@
         ],
         "correctAnswer": "3",
         "explanation": "별도의 예시(Few-shot) 없이 논리적 추론을 유도하기 위해 \"Let's think step by step(단계별로 생각해봐)\" 같은 문구를 사용하는 것을 Zero-shot-CoT라고 합니다."
+    },
+    {
+        "id": 1,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "프롬프트 엔지니어링의 확장 개념인 'Context Engineering'의 핵심 요소 중 'Format'에 대한 설명으로 옳은 것은?",
+        "options": [
+            "1. 모델에게 부여할 인격이나 역할을 설정하는 것이다.",
+            "2. 수행해야 할 명확한 작업 내용을 제시하는 것이다.",
+            "3. 작업 수행에 필요한 배경 지식이나 참고 문서를 제공하는 것이다.",
+            "4. 모델이 출력해야 할 결과물의 형식(JSON, Markdown 등)을 명시하는 것이다.",
+            "5. 모델의 윤리적 가이드라인을 설정하는 것이다."
+        ],
+        "correctAnswer": "4",
+        "explanation": "Format은 LLM이 생성한 답변을 사용자가 원하는 형태(예: JSON, 리스트, 특정 양식 등)로 출력하도록 형식을 지정하는 요소입니다."
+    },
+    {
+        "id": 2,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "프롬프트 내에서 예시를 제공하여 모델이 패턴을 학습하게 하는 'Few-shot Prompting'에 대한 설명으로 틀린 것은?",
+        "options": [
+            "1. 모델이 예시의 톤이나 어휘에 영향을 받을 수 있다.",
+            "2. 예시가 전혀 없는 Zero-shot보다 일반적으로 성능이 높다.",
+            "3. 예시의 순서나 개수는 모델의 출력에 영향을 주지 않는다.",
+            "4. 입력된 예시에 과도하게 몰입되면 편향(Bias)이 발생할 수 있다.",
+            "5. 프롬프트 템플릿을 활용해 입력 변수만 변경하여 사용할 수 있다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "Few-shot Prompting에서 예시의 순서, 개수, 내용 등은 모델의 출력 결과에 민감한 영향을 미칠 수 있습니다."
+    },
+    {
+        "id": 3,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "LangChain 표현 언어(LCEL)에서 `prompt | llm`과 같이 체인을 연결할 때 사용하는 기호(`|`)의 명칭과 역할은?",
+        "options": [
+            "1. Slash - 경로 구분",
+            "2. Pipe - 앞 Runnable의 출력을 뒤 Runnable의 입력으로 전달",
+            "3. Ampersand - 두 작업을 동시에 실행",
+            "4. Colon - 키와 값의 연결",
+            "5. Dash - 부가 설명 추가"
+        ],
+        "correctAnswer": "2",
+        "explanation": "파이프(`|`) 연산자는 유닉스 파이프와 유사하게 왼쪽 객체의 출력을 오른쪽 객체의 입력으로 연결하여 체인을 구성하는 핵심 역할을 합니다."
+    },
+    {
+        "id": 4,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "LCEL의 `RunnablePassthrough` 기능 중 `.assign()` 메서드의 주된 역할은?",
+        "options": [
+            "1. 체인의 실행을 즉시 중단한다.",
+            "2. 이전 단계의 출력을 무시하고 새로운 값을 할당한다.",
+            "3. 기존 입력 데이터를 유지하면서 새로운 값을 계산하여 추가(결합)한다.",
+            "4. 에러가 발생했을 때 대체 값을 할당한다.",
+            "5. LLM의 파라미터를 초기화한다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "`assign()`은 현재 딕셔너리 형태의 데이터에 새로운 키-값 쌍을 추가하여, 이전 단계의 데이터를 보존하면서 필요한 정보를 덧붙일 때 사용합니다."
+    },
+    {
+        "id": 5,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "LLM이 스스로 논리적 추론 과정을 거치다가 지나친 추론으로 인해 오히려 성능이 저하되는 현상을 무엇이라고 하는가?",
+        "options": [
+            "1. Underfitting",
+            "2. Over Thinking",
+            "3. Hallucination",
+            "4. Prompt Injection",
+            "5. Token Limit"
+        ],
+        "correctAnswer": "2",
+        "explanation": "Chain-of-Thought(CoT) 등을 사용할 때 모델이 답을 낸 뒤에도 스스로 계속 의심하며 불필요하게 복잡한 추론을 이어가는 'Over Thinking'이 발생할 수 있습니다."
+    },
+    {
+        "id": 6,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "영어 프롬프트 사용 시 '토큰 소모' 측면에서의 이점은 무엇인가?",
+        "options": [
+            "1. 한글보다 토큰 당 글자 수가 적어 토큰 소모가 더 많다.",
+            "2. 동일한 내용을 표현할 때 한글보다 토큰 수가 적게 들어 비용이 절감된다.",
+            "3. 토큰 소모량은 언어와 상관없이 동일하다.",
+            "4. 영어는 토큰 제한이 없다.",
+            "5. 토큰 비용은 줄어들지만 처리 속도는 느려진다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "대부분의 LLM 토크나이저는 영어에 최적화되어 있어, 같은 의미를 전달할 때 한글보다 더 적은 수의 토큰을 사용하므로 비용 절감 및 속도 향상 효과가 있습니다."
+    },
+    {
+        "id": 7,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "문서 요약 방법 중 'Stuff' 방식의 가장 큰 단점은?",
+        "options": [
+            "1. 구현이 너무 복잡하다.",
+            "2. 요약의 정확도가 매우 낮다.",
+            "3. LLM을 여러 번 호출해야 한다.",
+            "4. 텍스트가 길어지면 컨텍스트 윈도우(Context Window) 제한을 초과할 수 있다.",
+            "5. 가장 느린 방식이다."
+        ],
+        "correctAnswer": "4",
+        "explanation": "Stuff 방식은 전체 문서를 한 번에 프롬프트에 넣는 방식이므로, 문서 길이가 모델의 입력 한도(Context Window)를 넘어가면 처리할 수 없습니다."
+    },
+    {
+        "id": 8,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "문서 요약 기법 중 Map-Reduce와 Refine을 결합하여 사용하는 방식은?",
+        "options": [
+            "1. Stuff-Refine",
+            "2. Hybrid",
+            "3. Zero-shot Summary",
+            "4. Chain Summary",
+            "5. Vector Summary"
+        ],
+        "correctAnswer": "2",
+        "explanation": "Map-Reduce와 Refine의 장점을 결합하거나, 단계를 나누어 각각 다른 방식을 적용하여 최종 요약을 생성하는 방식을 Hybrid 방식이라고 합니다."
+    },
+    {
+        "id": 9,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "LLM Tool Calling 메커니즘에서, 도구 사용을 마치고 작업을 완료할 때 모델이 생성하는 신호는?",
+        "options": [
+            "1. END of text",
+            "2. STOP Function",
+            "3. SYSTEM HALT",
+            "4. BREAK POINT",
+            "5. RETURN NULL"
+        ],
+        "correctAnswer": "1",
+        "explanation": "Function call로 툴을 실행하다가 더 이상 수행할 작업이 없으면 'END of text' 토큰을 생성하여 작업을 중단합니다."
+    },
+    {
+        "id": 10,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "Tool Calling을 통해 LLM이 'Giver'로서 수행할 수 있는 역할로 가장 적절한 것은?",
+        "options": [
+            "1. 단순히 사용자의 질문에 텍스트로만 답변한다.",
+            "2. 사용자가 제공한 텍스트를 요약만 한다.",
+            "3. 파일 시스템 접근, API 호출 등 실제 행동(Action)을 수행하고 제어한다.",
+            "4. 인터넷 연결 없이 내부 지식만 사용한다.",
+            "5. 사용자의 감정을 분석하여 위로한다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "Giver로서의 LLM은 외부 툴과 소통하며 코딩, 파일 저장, API 호출 등 실질적인 과제를 수행하고 상황을 제어하는 역할을 합니다."
+    },
+    {
+        "id": 11,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "LangChain에서 메모리(Memory)를 구현할 때, 주로 어떤 단위로 짧은 기억(Short-term memory)을 형성하는가?",
+        "options": [
+            "1. User 단위",
+            "2. Server 단위",
+            "3. Session 단위",
+            "4. Packet 단위",
+            "5. Query 단위"
+        ],
+        "correctAnswer": "3",
+        "explanation": "LLM 서비스에서 대화의 맥락을 유지하기 위해 주로 세션(Session) 단위로 단기 기억을 형성하여 관리합니다."
+    },
+    {
+        "id": 12,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "Agent Q가 기존 ReAct나 ReFlexion과 차별화되는 핵심 구성 요소는?",
+        "options": [
+            "1. Memory Module",
+            "2. Critic LLM",
+            "3. Vector DB",
+            "4. Python REPL",
+            "5. Image Generator"
+        ],
+        "correctAnswer": "2",
+        "explanation": "Agent Q는 실행 후보 중 최적의 경로를 선택하기 위해 평가하고 비판하는 'Critic LLM'을 활용하는 것이 특징입니다."
+    },
+    {
+        "id": 13,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "'Workflow' 방식의 에이전트 설계가 '자율 에이전트'보다 효율적인 이유는?",
+        "options": [
+            "1. LLM을 전혀 사용하지 않기 때문이다.",
+            "2. 모든 판단을 사람이 직접 하기 때문이다.",
+            "3. 정해진 흐름대로 진행하며 필요한 순간에만 LLM의 판단을 활용하기 때문이다.",
+            "4. 무작위로 작업을 수행하기 때문이다.",
+            "5. 학습 데이터가 필요 없기 때문이다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "완전 자율화는 불필요한 단계에서도 LLM을 사용하여 비효율적일 수 있으나, Workflow는 기본 경로는 고정하고 중요 분기점에서만 LLM을 사용하여 효율성을 높입니다."
+    },
+    {
+        "id": 14,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "Stanford STORM 에이전트의 글쓰기 방식 특징은?",
+        "options": [
+            "1. 하나의 LLM이 처음부터 끝까지 혼자 작성한다.",
+            "2. 인터넷 검색 없이 내부 지식만으로 작성한다.",
+            "3. LLM에 각각의 페르소나를 부여해 대화하게 하고, 그 내용을 수집하여 글을 쓴다.",
+            "4. 사용자가 문장마다 피드백을 주어야 한다.",
+            "5. 이미지를 텍스트로 변환하여 작성한다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "Stanford STORM은 다양한 관점(페르소나)을 가진 에이전트들이 서로 대화하며 정보를 수집하고 이를 바탕으로 풍부한 내용을 담은 글을 작성하는 방식입니다."
+    },
+    {
+        "id": 15,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "'Open Deep Research' 에이전트의 보고서 작성 흐름으로 올바른 순서는?",
+        "options": [
+            "1. Topic 제시 -> Intro 작성 -> Section 글쓰기 -> 전체 완성",
+            "2. Topic 제시 -> Section 별 글쓰기 -> Section 글 작성 -> Intro 및 결론 작성 -> 전체 보고서 완성",
+            "3. 전체 작성 -> 요약 -> Topic 추출",
+            "4. 검색 -> 평가 -> 질문 -> 답변",
+            "5. 코드 작성 -> 실행 -> 오류 수정 -> 완료"
+        ],
+        "correctAnswer": "2",
+        "explanation": "Open Deep Research는 주제 선정 후 섹션별로 나누어 글을 작성하고, 마지막에 서론과 결론을 붙여 전체 보고서를 완성하는 구조적 접근을 취합니다."
+    },
+    {
+        "id": 16,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "RAG(Retrieval Augmented Generation)가 환각(Hallucination) 현상을 완화하는 데 효과적인 이유는?",
+        "options": [
+            "1. LLM의 파라미터 수를 줄이기 때문이다.",
+            "2. 검색된 사실 기반의 정보를 Context로 함께 제공하여 근거 있는 답변을 유도하기 때문이다.",
+            "3. 답변 길이를 강제로 제한하기 때문이다.",
+            "4. 창의적인 답변을 원천 차단하기 때문이다.",
+            "5. 사용자의 질문을 무시하고 검색 결과만 출력하기 때문이다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "RAG는 모델이 모르는 내용이나 최신 정보에 대해, 관련된 외부 문서를 검색하여 프롬프트에 참고 자료로 넣어주므로(Grounding), 거짓 정보를 생성할 확률을 낮춥니다."
+    },
+    {
+        "id": 17,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "PydanticOutputParser와 같은 파서(Parser)를 사용하는 주된 목적은?",
+        "options": [
+            "1. LLM의 응답 속도를 높이기 위해",
+            "2. LLM의 출력을 Python 클래스나 JSON 등 구조화된 데이터로 변환하기 위해",
+            "3. 프롬프트의 길이를 늘리기 위해",
+            "4. LLM의 학습 데이터를 수정하기 위해",
+            "5. 다국어 번역을 수행하기 위해"
+        ],
+        "correctAnswer": "2",
+        "explanation": "Parser는 LLM이 생성한 비정형 텍스트를 시스템에서 프로그래밍적으로 활용할 수 있는 구조화된 포맷(객체, JSON 등)으로 변환하는 역할을 합니다."
+    },
+    {
+        "id": 18,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "다음 중 LangChain Agent 유형에 해당하지 않는 것은?",
+        "options": [
+            "1. LangGraph",
+            "2. Multi-Source RAG Agent",
+            "3. Multi Agent",
+            "4. Single Shot Agent",
+            "5. Stanford STORM"
+        ],
+        "correctAnswer": "4",
+        "explanation": "학습 내용에는 LangGraph, Multi-Source RAG, Multi Agent, Stanford STORM 등이 언급되었으나 'Single Shot Agent'라는 용어는 에이전트 종류로 명시되지 않았습니다."
+    },
+    {
+        "id": 19,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "프롬프트 작성 시 구분 기호(#, ---, [], <>)를 사용하는 '프롬프트 구조화'의 주된 효과는?",
+        "options": [
+            "1. 토큰 사용량을 늘려 비용을 증가시킨다.",
+            "2. 사람이 읽기 어렵게 만들어 보안을 강화한다.",
+            "3. 각 요소를 명확하게 분리하여 LLM이 집중해야 할 부분을 쉽게 파악하게 한다.",
+            "4. 모델의 창의성을 억제한다.",
+            "5. 이미지를 텍스트로 변환한다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "구분 기호를 사용하면 지시사항, 예시, 입력 데이터 등의 경계를 명확히 하여 모델이 프롬프트의 구조를 더 정확하게 이해하도록 돕습니다."
+    },
+    {
+        "id": 20,
+        "chapter": "4. 프롬프트 엔지니어링",
+        "question": "요약 성능 평가 기준에 대한 설명 중 옳은 것은?",
+        "options": [
+            "1. 과거에는 Rouge 점수를 사용하여 인간의 요약문과 겹침 정도를 평가했다.",
+            "2. 현재는 Rouge 점수만으로 완벽한 평가가 가능하다.",
+            "3. Rouge 점수는 문장의 의미적 유사도를 완벽하게 측정한다.",
+            "4. 요약 평가는 오직 사람만이 할 수 있다.",
+            "5. 평가 기준은 더 이상 중요하지 않다."
+        ],
+        "correctAnswer": "1",
+        "explanation": "과거에는 단어 중복도를 기반으로 하는 Rouge 지표를 주로 사용했으나, 의미적 유사성까지 판단하기에는 한계가 있어 새로운 평가 기준이 요구되고 있습니다."
     }
 ]
