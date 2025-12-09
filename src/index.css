@@ -1,42 +1,74 @@
 :root {
-  /* Color Palette - Premium & Modern */
-  --primary-hue: 250; /* Deep Purple/Indigo */
-  --primary: hsl(var(--primary-hue), 70%, 60%);
-  --primary-dark: hsl(var(--primary-hue), 70%, 50%);
-  --primary-light: hsl(var(--primary-hue), 80%, 75%);
-  
-  --secondary-hue: 180; /* Teal/Cyan */
-  --secondary: hsl(var(--secondary-hue), 60%, 50%);
+  /* Color Palette - Samsung Style */
+  --primary-hue: 225;
+  --primary: #1428A0;
+  --primary-dark: #0b1d85;
+  --primary-light: #4860e6;
 
-  --bg-color: #0f172a; /* Slate 900 */
-  --surface-color: #1e293b; /* Slate 800 */
-  --surface-highlight: #334155; /* Slate 700 */
+  --secondary-hue: 200;
+  --secondary: #007bff;
 
-  --text-main: #f8fafc; /* Slate 50 */
-  --text-muted: #94a3b8; /* Slate 400 */
-  
-  --success: #10b981;
-  --error: #ef4444;
-  --warning: #f59e0b;
+  /* Semantic Variables (Default Light Theme) */
+  --bg-color: #f8f9fa;
+  --surface-color: #ffffff;
+  --surface-highlight: #e9ecef;
+  --text-main: #212529;
+  --text-muted: #6c757d;
 
-  /* Glassmorphism */
-  --glass-bg: rgba(30, 41, 59, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-bg: #ffffff;
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+
+  --item-bg: #ffffff;
+  --item-bg-hover: rgba(20, 40, 160, 0.04);
+  --item-bg-selected: rgba(20, 40, 160, 0.1);
+  --item-border: rgba(0, 0, 0, 0.08);
+  --item-border-selected: var(--primary);
+
+  --success: #198754;
+  --error: #dc3545;
+  --warning: #ffc107;
 
   /* Spacing & Radius */
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
   --container-width: 800px;
+}
+
+/* Dark Theme Variables */
+[data-theme='dark'] {
+  --primary: #5c6bc0;
+  /* Lighter Indigo for Dark Mode */
+  --primary-dark: #3949ab;
+  --primary-light: #7986cb;
+
+  --bg-color: #121212;
+  /* Deep Black/Gray */
+  --surface-color: #1e1e1e;
+  /* Dark Surface */
+  --surface-highlight: #333333;
+
+  --text-main: #e0e0e0;
+  --text-muted: #a0a0a0;
+
+  --glass-bg: #1e1e1e;
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+
+  --item-bg: #2c2c2c;
+  --item-bg-hover: rgba(255, 255, 255, 0.05);
+  --item-bg-selected: rgba(92, 107, 192, 0.2);
+  --item-border: rgba(255, 255, 255, 0.1);
+  --item-border-selected: var(--primary);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'SamsungOne', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 body {
@@ -45,11 +77,11 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Align top but centered */
+  align-items: flex-start;
   padding-top: 4rem;
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(var(--primary-hue), 50, 50, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(var(--secondary-hue), 50, 50, 0.15) 0px, transparent 50%);
+  background-image: none;
+  /* Removed fixed gradient for better dark mode handling */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #root {
@@ -59,15 +91,18 @@ body {
 }
 
 /* Typography */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 700;
   line-height: 1.2;
 }
 
 h1 {
   font-size: 2.5rem;
-  background: linear-gradient(to right, var(--primary-light), var(--secondary));
+  background: linear-gradient(to right, var(--primary), var(--secondary));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 2rem;
   text-align: center;
@@ -84,27 +119,38 @@ button {
 /* Utility Components */
 .card {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
-  padding: 2rem;
+  padding: 2.5rem;
   box-shadow: var(--glass-shadow);
   margin-bottom: 2rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  background: var(--primary);
   color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-md);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 0.8rem 1.6rem;
+  border-radius: 99px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
   filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:disabled {
+  background: #cbd5e1;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+[data-theme='dark'] .btn-primary:disabled {
+  background: #4a4a4a;
+  color: #888;
 }
 
 .btn-outline {
@@ -112,11 +158,34 @@ button {
   border: 2px solid var(--surface-highlight);
   color: var(--text-main);
   padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-md);
+  border-radius: 99px;
 }
 
 .btn-outline:hover {
   border-color: var(--primary);
-  color: var(--primary-light);
-  background: rgba(255,255,255,0.05);
+  color: var(--primary);
+  background: var(--item-bg-hover);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--surface-color);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--surface-highlight);
 }

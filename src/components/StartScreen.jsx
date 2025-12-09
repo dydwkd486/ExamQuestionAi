@@ -50,12 +50,14 @@ export default function StartScreen({ chapters, onStart }) {
                     style={{
                         padding: '1rem',
                         textAlign: 'left',
-                        background: selectedChapters.length === chapters.length ? 'rgba(var(--primary-hue), 70%, 60%, 0.3)' : 'rgba(255,255,255,0.05)',
-                        border: `1px solid ${selectedChapters.length === chapters.length ? 'var(--primary)' : 'var(--surface-highlight)'}`,
+                        background: selectedChapters.length === chapters.length ? 'var(--item-bg-selected)' : 'var(--item-bg)',
+                        border: `1px solid ${selectedChapters.length === chapters.length ? 'var(--item-border-selected)' : 'var(--item-border)'}`,
                         borderRadius: 'var(--radius-md)',
-                        color: 'var(--text-main)',
+                        color: selectedChapters.length === chapters.length ? 'var(--primary)' : 'var(--text-main)',
                         width: '100%',
-                        fontWeight: '600'
+                        fontWeight: '600',
+                        boxShadow: 'var(--glass-shadow)',
+                        transition: 'all 0.2s ease'
                     }}
                 >
                     {selectedChapters.length === chapters.length ? '✔ 전체 선택 해제' : '전체 선택'}
@@ -68,11 +70,13 @@ export default function StartScreen({ chapters, onStart }) {
                         style={{
                             padding: '1rem',
                             textAlign: 'left',
-                            background: selectedChapters.includes(chapter) ? 'rgba(var(--primary-hue), 70%, 60%, 0.3)' : 'rgba(255,255,255,0.05)',
-                            border: `1px solid ${selectedChapters.includes(chapter) ? 'var(--primary)' : 'var(--surface-highlight)'}`,
+                            background: selectedChapters.includes(chapter) ? 'var(--item-bg-selected)' : 'var(--item-bg)',
+                            border: `1px solid ${selectedChapters.includes(chapter) ? 'var(--item-border-selected)' : 'var(--item-border)'}`,
                             borderRadius: 'var(--radius-md)',
-                            color: 'var(--text-main)',
-                            width: '100%'
+                            color: selectedChapters.includes(chapter) ? 'var(--primary)' : 'var(--text-main)',
+                            width: '100%',
+                            boxShadow: 'var(--glass-shadow)',
+                            transition: 'all 0.2s ease'
                         }}
                     >
                         {selectedChapters.includes(chapter) ? '✔ ' : ''}{chapter}
@@ -80,7 +84,7 @@ export default function StartScreen({ chapters, onStart }) {
                 ))}
             </div>
 
-            <div style={{ marginBottom: '2rem', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: 'var(--radius-md)' }}>
+            <div style={{ marginBottom: '2rem', padding: '1rem', background: 'var(--surface-highlight)', borderRadius: 'var(--radius-md)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
                     <label style={{ fontWeight: '600', color: 'var(--text-main)' }}>문제 수 선택</label>
                     <span style={{ color: 'var(--primary)', fontWeight: 'bold' }}>{questionCount}문제</span>
@@ -112,10 +116,10 @@ export default function StartScreen({ chapters, onStart }) {
                         style={{
                             width: '100%',
                             padding: '1rem',
-                            background: 'rgba(239, 68, 68, 0.2)',
+                            background: 'transparent',
                             color: 'var(--error)',
                             border: '1px solid var(--error)',
-                            borderRadius: 'var(--radius-md)',
+                            borderRadius: '99px',
                             fontSize: '1rem',
                             fontWeight: '600',
                             cursor: 'pointer'

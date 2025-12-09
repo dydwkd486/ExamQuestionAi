@@ -11,12 +11,26 @@ function App() {
   const [questionsData, setQuestionsData] = useState([]);
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
+  // Theme state
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
 
   useEffect(() => {
     // Load questions on mount
     const data = loadAllQuestions();
     setQuestionsData(data);
   }, []);
+
+  // Theme support
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   useEffect(() => {
     // Prevent accidental navigation during quiz
@@ -81,7 +95,15 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container" style={{ position: 'relative' }}>
+      <button
+        className="theme-toggle"
+        onClick={toggleTheme}
+        title={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} Mode`}
+      >
+        {theme === 'light' ? '🌙' : '☀️'}
+      </button>
+
       <header style={{ marginBottom: '2rem', textAlign: 'center' }}>
         <h1 onClick={handleLogoClick} style={{ cursor: 'pointer' }}>Exam Question AI</h1>
       </header>

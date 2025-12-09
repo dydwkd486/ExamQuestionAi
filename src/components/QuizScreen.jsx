@@ -69,7 +69,7 @@ export default function QuizScreen({ questions, onFinish }) {
                 <div style={{
                     marginBottom: '2rem',
                     padding: '1rem',
-                    background: 'rgba(0,0,0,0.2)',
+                    background: 'var(--surface-highlight)',
                     borderRadius: 'var(--radius-md)',
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fill, minmax(40px, 1fr))',
@@ -81,10 +81,10 @@ export default function QuizScreen({ questions, onFinish }) {
                             onClick={() => jumpToQuestion(idx)}
                             style={{
                                 padding: '0.5rem',
-                                background: currentIndex === idx ? 'var(--primary)' : answers[q.id] ? 'var(--surface-highlight)' : 'transparent',
+                                background: currentIndex === idx ? 'var(--primary)' : answers[q.id] ? 'var(--item-bg-selected)' : 'transparent',
                                 border: '1px solid var(--glass-border)',
                                 borderRadius: '4px',
-                                color: 'var(--text-main)',
+                                color: currentIndex === idx ? 'white' : 'var(--text-main)',
                                 cursor: 'pointer',
                                 fontWeight: currentIndex === idx ? 'bold' : 'normal'
                             }}
@@ -113,7 +113,7 @@ export default function QuizScreen({ questions, onFinish }) {
             <div className="progress-bar-container" style={{
                 width: '100%',
                 height: '6px',
-                background: 'rgba(255,255,255,0.1)',
+                background: 'var(--surface-highlight)',
                 borderRadius: '3px',
                 marginBottom: '2rem',
                 overflow: 'hidden'
@@ -142,19 +142,19 @@ export default function QuizScreen({ questions, onFinish }) {
                         key={index}
                         onClick={() => handleOptionSelect(option)}
                         style={{
-                            padding: '1.2rem',
-                            textAlign: 'left',
-                            background: selectedOption === option
-                                ? 'rgba(var(--primary-hue), 70%, 60%, 0.2)'
-                                : 'rgba(255,255,255,0.05)',
-                            border: `1px solid ${selectedOption === option ? 'var(--primary)' : 'var(--surface-highlight)'}`,
-                            borderRadius: 'var(--radius-md)',
-                            color: 'var(--text-main)',
                             width: '100%',
+                            padding: '1.25rem',
+                            textAlign: 'left',
+                            background: selectedOption === option ? 'var(--item-bg-selected)' : 'var(--item-bg)',
+                            border: selectedOption === option ? '2px solid var(--item-border-selected)' : '1px solid var(--item-border)',
+                            borderRadius: 'var(--radius-md)',
+                            color: selectedOption === option ? 'var(--primary)' : 'var(--text-main)',
                             fontSize: '1rem',
+                            lineHeight: '1.5',
                             transition: 'all 0.2s ease',
                             display: 'flex',
-                            alignItems: 'center'
+                            alignItems: 'center',
+                            boxShadow: selectedOption === option ? 'var(--glass-shadow)' : '0 2px 4px rgba(0,0,0,0.02)'
                         }}
                     >
                         <span style={{
