@@ -1,0 +1,1402 @@
+[
+    {
+        "id": 1,
+        "chapter": "3. LLM 기본",
+        "question": "현재 LLM(Large Language Model)의 주된 역할과 특징으로 가장 적절한 것은?",
+        "options": [
+            "1. 언어 패턴을 학습하여 정해진 답만 출력하는 검색 엔진 역할을 한다.",
+            "2. 픽셀 데이터를 직접 처리하여 이미지를 생성하는 것이 주된 역할이다.",
+            "3. 언어의 패턴을 학습하여 확률적으로 다음에 올 말을 생성(Generation)한다.",
+            "4. 데이터베이스에 저장된 문장을 그대로 복사하여 출력한다.",
+            "5. 수치 예측만을 전문으로 하는 회귀 분석 모델이다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "LLM은 언어 패턴을 학습해 언어를 생성하는 모델이며, 현재 주된 역할은 언어 생성입니다."
+    },
+    {
+        "id": 2,
+        "chapter": "3. LLM 기본",
+        "question": "데이터 분석에서 '예측(Prediction)'과 '생성(Generation)'의 차이점에 대한 설명으로 옳은 것은?",
+        "options": [
+            "1. 예측은 새로운 데이터 포인트(X)를 만들어내는 것이다.",
+            "2. 생성은 기존 데이터 분포를 이해하고 새로운 데이터 점(X, Y)을 만들어내는 것이다.",
+            "3. 생성은 기존에 있는 데이터 중 가장 유사한 것을 찾아내는 것이다.",
+            "4. 예측과 생성은 기술적으로 완전히 동일한 개념이다.",
+            "5. 생성 모델은 데이터 분포를 학습하지 않는다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "예측은 기존 분포를 이해하고 입력에 대한 출력을 추론하는 것이며, 생성은 데이터가 없어도 모델만으로 새로운 데이터 포인트를 만들어내는 것입니다."
+    },
+    {
+        "id": 3,
+        "chapter": "3. LLM 기본",
+        "question": "자연어 데이터 학습이 어려운 이유로 적절하지 않은 것은?",
+        "options": [
+            "1. 자연어는 픽셀 값이나 수치형 데이터가 아니다.",
+            "2. 기계학습 모델에 넣기 위해 숫자(벡터)로 변환하는 과정이 필요하다.",
+            "3. 자연어 데이터는 길이가 일정하지 않다.",
+            "4. 'A는 B를 좋아한다'와 'B는 A를 좋아한다'는 단어 구성이 같아 기계가 구분하기 쉽다.",
+            "5. 모델 설계 전 데이터를 세팅하는 과정(전처리/임베딩)이 필수적이다."
+        ],
+        "correctAnswer": "4",
+        "explanation": "자연어는 단어 순서에 따라 의미가 완전히 달라지므로(비교환성), 단순 구성 요소가 같다고 해서 같은 의미가 아니며 이를 기계가 이해하기 어렵습니다."
+    },
+    {
+        "id": 4,
+        "chapter": "3. LLM 기본",
+        "question": "자연어 처리에서 '임베딩(Embedding)'의 핵심 개념은?",
+        "options": [
+            "1. 텍스트를 이미지로 변환하는 기술",
+            "2. 자연어 등의 추상적 데이터를 컴퓨터가 이해할 수 있도록 벡터(숫자)로 변환하는 과정",
+            "3. 문장의 문법적 오류를 수정하는 기술",
+            "4. 데이터를 압축하여 용량을 줄이는 기술",
+            "5. 텍스트를 음성으로 변환하는 기술"
+        ],
+        "correctAnswer": "2",
+        "explanation": "임베딩은 언어, 그래프, 소리 등 추상적인 데이터를 컴퓨터가 연산 가능한 벡터 형태로 변환하는 것을 의미합니다."
+    },
+    {
+        "id": 5,
+        "chapter": "3. LLM 기본",
+        "question": "초기 자연어 처리 방식인 'Word2vec'의 한계점으로 옳은 것은?",
+        "options": [
+            "1. 단어 간의 유사도를 측정할 수 없다.",
+            "2. 동음이의어(철자는 같으나 뜻이 다른 단어)를 구분하여 처리할 수 없다.",
+            "3. 벡터 연산이 불가능하다.",
+            "4. 단어보다 더 작은 단위로 쪼개서 처리한다.",
+            "5. 문맥을 전혀 고려하지 않고 무작위로 배치한다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "Word2vec은 단어 자체를 하나의 벡터로 고정하므로, 문맥에 따라 뜻이 달라지는 동음이의어를 구분하지 못하는 한계가 있습니다."
+    },
+    {
+        "id": 6,
+        "chapter": "3. LLM 기본",
+        "question": "LLM에서 사용하는 '토큰(Token)'의 정의로 가장 적절한 것은?",
+        "options": [
+            "1. 문장 전체를 하나의 단위로 본 것",
+            "2. 알파벳 글자 하나하나의 단위",
+            "3. 단어나 텍스트 묶음을 더 잘게 나눈 단위로, 단어보다 작고 글자 하나보다는 큰 단위",
+            "4. 띄어쓰기 기준으로 나눈 어절 단위",
+            "5. 문단의 단위"
+        ],
+        "correctAnswer": "3",
+        "explanation": "토큰은 텍스트를 처리하는 가장 작은 단위로, 보통 단어보다는 작고 글자(Character)보다는 큰 의미 있는 조각으로 정의됩니다."
+    },
+    {
+        "id": 7,
+        "chapter": "3. LLM 기본",
+        "question": "기존 RNN 모델 대비 '트랜스포머(Transformer)' 모델이 극복한 가장 큰 한계는?",
+        "options": [
+            "1. 이미지 처리 속도",
+            "2. 짧은 문장의 처리 정확도",
+            "3. 문장이 길어질수록 앞의 내용을 잊어버리는 문제 (Long Context 처리)",
+            "4. 파라미터 개수의 부족",
+            "5. 음성 인식 불가 문제"
+        ],
+        "correctAnswer": "3",
+        "explanation": "RNN은 순차적 처리로 인해 문장이 길어지면 앞 내용을 망각하지만, 트랜스포머는 병렬적 처리와 어텐션 메커니즘으로 긴 문맥(Long Context)을 보존할 수 있습니다."
+    },
+    {
+        "id": 8,
+        "chapter": "3. LLM 기본",
+        "question": "트랜스포머 구조에서 토큰의 순서(위치) 정보를 알려주기 위해 사용하는 기술은?",
+        "options": [
+            "1. Tokenization",
+            "2. Word Embedding",
+            "3. Positional Encoding",
+            "4. Softmax",
+            "5. Normalization"
+        ],
+        "correctAnswer": "3",
+        "explanation": "트랜스포머는 병렬 처리 구조이므로 순서 정보가 사라지는 것을 방지하기 위해 위치 인코딩 벡터(Positional Encoding)를 더해줍니다."
+    },
+    {
+        "id": 9,
+        "chapter": "3. LLM 기본",
+        "question": "트랜스포머의 핵심 모듈인 'Self-Attention'의 역할은?",
+        "options": [
+            "1. 입력된 문장을 번역한다.",
+            "2. 다른 단어와의 관계(유사도 등)를 계산하여 현재 단어(자신)를 표현한다.",
+            "3. 이미지를 텍스트로 변환한다.",
+            "4. 결과 값을 0과 1 사이로 압축한다.",
+            "5. 단순히 입력 값을 그대로 출력한다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "Self-Attention은 Query, Key, Value를 통해 문장 내 다른 단어들과의 관계를 계산하고 맥락을 파악하여 해당 토큰을 표현합니다."
+    },
+    {
+        "id": 10,
+        "chapter": "3. LLM 기본",
+        "question": "트랜스포머의 인코더(Encoder)와 디코더(Decoder)에 대한 설명으로 틀린 것은?",
+        "options": [
+            "1. 인코더는 입력 문장의 의미를 파악하는 데 특화되어 있다.",
+            "2. 디코더는 출력 문장을 순차적으로 생성하는 데 특화되어 있다.",
+            "3. 인코더 구조는 후에 BERT 모델로 발전했다.",
+            "4. 디코더 구조는 후에 GPT 모델로 발전했다.",
+            "5. 디코더는 문장의 앞뒤 문맥을 모두 동시에 보면서 생성한다."
+        ],
+        "correctAnswer": "5",
+        "explanation": "디코더는 다음 토큰을 생성할 때, 자기 자신보다 앞에 있는 단어들만 참고(Masked Self-Attention)하여 순차적으로 생성합니다."
+    },
+    {
+        "id": 11,
+        "chapter": "3. LLM 기본",
+        "question": "BERT 모델의 특징으로 가장 적절한 것은?",
+        "options": [
+            "1. 디코더 구조를 활용하여 텍스트 생성에 특화됨",
+            "2. 인코더 구조를 활용하며 양방향 문맥을 파악하여 의미 추출에 강점이 있음",
+            "3. 순차적으로 단어를 생성하는 것이 주 목적임",
+            "4. 이미지를 생성하는 모델임",
+            "5. 강화학습만을 이용해 만들어진 모델임"
+        ],
+        "correctAnswer": "2",
+        "explanation": "BERT는 Transformer의 인코더 구조를 기반으로 하며, 문장의 양방향 맥락을 이해하여 의미를 파악하는 데 목적이 있습니다."
+    },
+    {
+        "id": 12,
+        "chapter": "3. LLM 기본",
+        "question": "파운데이션 모델(Foundation Model)의 학습 과정인 Pretrain(사전 학습)과 Fine-Tuning(미세 조정)에 대한 설명으로 옳은 것은?",
+        "options": [
+            "1. Pretrain은 특정 정답을 맞히는 학습이다.",
+            "2. Fine-Tuning은 언어의 일반적인 패턴과 분포를 배우는 단계다.",
+            "3. Pretrain으로 언어의 패턴을 익히고, Fine-Tuning으로 특정 목적에 맞게 추가 학습한다.",
+            "4. 모든 모델은 Fine-Tuning을 먼저 수행하고 Pretrain을 나중에 한다.",
+            "5. Pretrain만으로는 모델을 사용할 수 없다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "Foundation Model은 방대한 데이터로 언어 패턴을 사전 학습(Pretrain)한 뒤, 목적에 맞게 미세 조정(Fine-Tuning)하여 사용합니다."
+    },
+    {
+        "id": 13,
+        "chapter": "3. LLM 기본",
+        "question": "GPT-3에서 발견된 능력으로, 별도의 추가 학습 없이 입력창(Context)에 예시를 주면 이를 바탕으로 답변하는 능력은?",
+        "options": [
+            "1. Fine-Tuning",
+            "2. In-Context Learning (Few-shot Learning)",
+            "3. Reinforcement Learning",
+            "4. Supervised Learning",
+            "5. Quantization"
+        ],
+        "correctAnswer": "2",
+        "explanation": "GPT-3는 데이터가 커짐에 따라 입력된 문맥 내의 예시를 보고 패턴을 파악하여 답변하는 In-Context Learning(Few-shot Learning) 능력을 보였습니다."
+    },
+    {
+        "id": 14,
+        "chapter": "3. LLM 기본",
+        "question": "GPT-3.5(ChatGPT) 개발 시 적용된 기법으로, 인간의 선호도를 반영하여 답변을 개선한 학습 방법은?",
+        "options": [
+            "1. BERT",
+            "2. RLHF (Reinforcement Learning from Human Feedback)",
+            "3. Word2vec",
+            "4. CNN",
+            "5. Unsupervised Learning"
+        ],
+        "correctAnswer": "2",
+        "explanation": "GPT-3.5는 SFT(Supervised Fine-Tuning)와 RLHF(인간 피드백 기반 강화학습)를 적용하여 인간이 선호하는 유익하고 안전한 답변을 하도록 조정되었습니다."
+    },
+    {
+        "id": 15,
+        "chapter": "3. LLM 기본",
+        "question": "RLHF(인간 피드백 기반 강화학습)의 부작용으로 언급된 단점은?",
+        "options": [
+            "1. 모델의 속도가 매우 느려진다.",
+            "2. 문법 오류가 늘어난다.",
+            "3. 객관성을 잃고 사용자의 비위를 맞추는 아첨(Sycophancy)을 하게 된다.",
+            "4. 이미지를 생성하지 못하게 된다.",
+            "5. 영어를 제외한 다른 언어를 잊어버린다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "RLHF는 인간의 선호도에 맞춰 점수를 받도록 학습되므로, 객관적 사실보다 사용자가 듣기 좋은 말이나 동의하는 방향으로 답변하는 부작용이 생길 수 있습니다."
+    },
+    {
+        "id": 16,
+        "chapter": "3. LLM 기본",
+        "question": "GPT-4에 적용된 MoE(Mixture of Experts) 구조의 특징은?",
+        "options": [
+            "1. 하나의 거대한 신경망이 모든 문제를 다 푼다.",
+            "2. 여러 개의 FFN(전문가) 중 문제 해결에 필요한 일부만 활성화하여 계산 효율을 높인다.",
+            "3. 모든 파라미터를 항상 사용하여 정확도를 높인다.",
+            "4. 이미지만 처리하기 위한 전용 구조이다.",
+            "5. RNN과 트랜스포머를 결합한 구조이다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "MoE는 Router를 통해 여러 개의 전문가(FFN) 네트워크 중 입력 처리에 적절한 일부만 선택하여 계산하므로 모델 크기 대비 추론 속도가 빠릅니다."
+    },
+    {
+        "id": 17,
+        "chapter": "3. LLM 기본",
+        "question": "멀티모달 토큰 처리가 가능한 'Any-to-Any' 모델로, 텍스트/이미지/오디오를 초기에 융합하여 학습한 모델은?",
+        "options": [
+            "1. GPT-1",
+            "2. BERT",
+            "3. GPT-3",
+            "4. GPT-4o",
+            "5. Llama 1"
+        ],
+        "correctAnswer": "4",
+        "explanation": "GPT-4o는 텍스트, 이미지, 오디오 등을 별도의 모델 연결이 아닌 하나의 모델에서 멀티미디어 토큰으로 변환하여 학습한 옴니(Omni) 모델입니다."
+    },
+    {
+        "id": 18,
+        "chapter": "3. LLM 기본",
+        "question": "상용 모델(Closed Model)과 오픈 모델(Open Model)의 차이점으로 옳은 것은?",
+        "options": [
+            "1. 상용 모델은 가중치(파라미터)를 다운로드하여 직접 실행할 수 있다.",
+            "2. 오픈 모델은 API를 통해서만 사용할 수 있다.",
+            "3. 상용 모델의 대표적인 예로는 Llama가 있다.",
+            "4. 오픈 모델은 GPU만 있으면 직접 설치 및 파인튜닝이 가능하다.",
+            "5. 오픈 모델이 상용 모델보다 항상 성능이 뛰어나다."
+        ],
+        "correctAnswer": "4",
+        "explanation": "오픈 모델(Llama, Qwen 등)은 파라미터가 공개되어 있어 GPU 장비가 있다면 직접 다운로드, 실행, 파인튜닝이 가능합니다."
+    },
+    {
+        "id": 19,
+        "chapter": "3. LLM 기본",
+        "question": "LLM 파라미터 수와 VRAM(비디오 메모리)의 관계에 대한 설명(16bit 기준)으로 옳은 예시는?",
+        "options": [
+            "1. 7B 모델(70억 파라미터)은 약 7GB VRAM이 필요하다.",
+            "2. 7B 모델(70억 파라미터)은 약 14GB VRAM이 필요하다.",
+            "3. 0.1B 모델은 10GB VRAM이 필요하다.",
+            "4. 파라미터 수가 클수록 VRAM 사용량은 줄어든다.",
+            "5. VRAM 용량은 모델 실행과 무관하다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "16bit(2byte) 모델 기준으로 파라미터 수에 2를 곱하면 대략적인 VRAM 필요량이 나옵니다. (70억 * 2byte = 14GB)"
+    },
+    {
+        "id": 20,
+        "chapter": "3. LLM 기본",
+        "question": "메타(Meta)에서 공개한 오픈 LLM 시리즈의 발전사 중 틀린 설명은?",
+        "options": [
+            "1. Llama 1: 데이터 레시피를 공개하여 오픈 소스 생태계에 큰 영향을 주었다.",
+            "2. Llama 2: 한국어 전용 모델로만 출시되었다.",
+            "3. Llama 3: 405B급의 대형 모델도 공개되었다.",
+            "4. Llama 3.2: 멀티모달 기능이 포함된 경량화 모델이다.",
+            "5. Llama 4: 컨텍스트 윈도우 확장에 대한 언급이 있었다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "Llama 2는 범용 모델로 출시되었으며, 이를 기반으로 한국어 파인튜닝(Ko-Llama 등)이 많이 이루어진 것이지 한국어 전용 모델로 출시된 것은 아닙니다."
+    },
+    {
+        "id": 21,
+        "chapter": "2. 데이터 분석",
+        "question": "CSV 파일을 Pandas DataFrame으로 불러오기 위해 사용하는 함수는?",
+        "options": [
+            "1. pd.load_csv()",
+            "2. pd.read_csv()",
+            "3. pd.import_csv()",
+            "4. pd.get_csv()",
+            "5. pd.open_csv()"
+        ],
+        "correctAnswer": "2",
+        "explanation": "Pandas에서 CSV 파일을 읽어오기 위한 표준 함수는 `pd.read_csv()`입니다."
+    },
+    {
+        "id": 22,
+        "chapter": "2. 데이터 분석",
+        "question": "DataFrame의 마지막 5개 행을 확인하고 싶을 때 사용하는 메서드는?",
+        "options": [
+            "1. df.head()",
+            "2. df.tail()",
+            "3. df.last()",
+            "4. df.end()",
+            "5. df.bottom()"
+        ],
+        "correctAnswer": "2",
+        "explanation": "`head()`는 상위 데이터를, `tail()`은 하위(마지막) 데이터를 확인하는 메서드입니다."
+    },
+    {
+        "id": 23,
+        "chapter": "2. 데이터 분석",
+        "question": "다음 중 파생 변수(새로운 컬럼)를 생성하는 방법으로 가장 적절한 예시는?",
+        "options": [
+            "1. df.add('new_col', values)",
+            "2. df['new_col'] = df['old_col'] * 2",
+            "3. df.append('new_col')",
+            "4. df.insert('new_col')",
+            "5. df.create('new_col')"
+        ],
+        "correctAnswer": "2",
+        "explanation": "Pandas에서는 딕셔너리에 키와 값을 추가하듯이 `df['새컬럼명'] = 연산식` 형태로 파생 변수를 쉽게 생성할 수 있습니다."
+    },
+    {
+        "id": 24,
+        "chapter": "2. 데이터 분석",
+        "question": "그룹화된 데이터에 대해 합계, 평균 등 여러 연산을 한 번에 적용할 때 사용하는 메서드는?",
+        "options": [
+            "1. sum()",
+            "2. mean()",
+            "3. agg()",
+            "4. count()",
+            "5. map()"
+        ],
+        "correctAnswer": "3",
+        "explanation": "`agg()` (aggregation) 메서드를 사용하면 여러 개의 집계 함수를 동시에 적용하거나, 컬럼별로 다른 함수를 적용할 수 있습니다."
+    },
+    {
+        "id": 25,
+        "chapter": "2. 데이터 분석",
+        "question": "텍스트로 된 컬럼에서 공백을 기준으로 단어를 분리하여 단어의 개수를 세려고 할 때 적절한 체인 연결은?",
+        "options": [
+            "1. .str.split().str.len()",
+            "2. .str.count().str.split()",
+            "3. .str.len().str.split()",
+            "4. .split().len()",
+            "5. .str.total()"
+        ],
+        "correctAnswer": "1",
+        "explanation": "먼저 `.str.split()`으로 문장을 단어 리스트로 쪼갠 후, 다시 `.str.len()`을 적용하면 리스트의 길이(단어 수)를 구할 수 있습니다."
+    },
+    {
+        "id": 26,
+        "chapter": "2. 데이터 분석",
+        "question": "엑셀의 피벗 테이블과 같이 행과 열을 기준으로 데이터를 요약하여 보여주는 함수는?",
+        "options": [
+            "1. cross_tab()",
+            "2. group_table()",
+            "3. pivot_table()",
+            "4. summary_table()",
+            "5. data_pivot()"
+        ],
+        "correctAnswer": "3",
+        "explanation": "`pivot_table()` 함수는 행 인덱스와 열 인덱스를 지정하여 데이터를 요약하고 집계하는 기능을 제공합니다."
+    },
+    {
+        "id": 27,
+        "chapter": "2. 데이터 분석",
+        "question": "텍스트 정규화(Normalization)의 주요 작업 내용으로 가장 적절한 것은?",
+        "options": [
+            "1. HTML 태그를 제거한다.",
+            "2. 문장을 단어 단위로 쪼갠다.",
+            "3. 대소문자를 통일하거나 숫자를 특정 기호(NUM)로 치환한다.",
+            "4. 중요하지 않은 조사를 제거한다.",
+            "5. 단어의 빈도수를 계산한다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "정규화는 표현 방법이 다른 단어들을 통합(대소문자 통일 등)하거나 일반화하여 단어의 개수를 줄이고 처리를 효율적으로 만드는 과정입니다."
+    },
+    {
+        "id": 28,
+        "chapter": "2. 데이터 분석",
+        "question": "정규표현식에서 '한글'만 추출하기 위해 사용하는 패턴은?",
+        "options": [
+            "1. [a-z]+",
+            "2. [0-9]+",
+            "3. [가-힣]+",
+            "4. \\w+",
+            "5. \\s+"
+        ],
+        "correctAnswer": "3",
+        "explanation": "`[가-힣]+` 패턴은 한글의 첫 글자부터 마지막 글자까지의 범위를 지정하여 한글 문자열을 매칭합니다."
+    },
+    {
+        "id": 29,
+        "chapter": "2. 데이터 분석",
+        "question": "연속된 n개의 단어를 묶어서 처리하여 문맥을 반영하는 기법은?",
+        "options": [
+            "1. One-hot Encoding",
+            "2. N-gram",
+            "3. TF-IDF",
+            "4. Word2Vec",
+            "5. Stopwords"
+        ],
+        "correctAnswer": "2",
+        "explanation": "N-gram은 연속된 n개의 아이템(단어 등)을 하나의 단위로 묶는 것으로, 단어 앞뒤의 문맥을 파악하는 데 도움을 줍니다."
+    },
+    {
+        "id": 30,
+        "chapter": "2. 데이터 분석",
+        "question": "TF-IDF 알고리즘에서 'TF(Term Frequency)'가 의미하는 것은?",
+        "options": [
+            "1. 전체 문서의 수",
+            "2. 특정 단어가 전체 문서에 등장한 횟수",
+            "3. 특정 문서 내에서 특정 단어가 등장한 비율(빈도)",
+            "4. 단어의 중요도에 대한 로그 값",
+            "5. 문서의 길이"
+        ],
+        "correctAnswer": "3",
+        "explanation": "TF는 Term Frequency의 약자로, 하나의 문서 안에서 특정 단어가 얼마나 자주 등장했는지를 나타내며, 해당 문서 내에서의 중요도를 반영합니다."
+    },
+    {
+        "id": 31,
+        "chapter": "2. 데이터 분석",
+        "question": "문서 유사도 측정 방법 중, 두 벡터 사이의 직선 거리를 계산하는 방법은?",
+        "options": [
+            "1. 코사인 유사도",
+            "2. 자카드 유사도",
+            "3. 유클리드 거리 (Euclidean Distance)",
+            "4. 맨해튼 거리",
+            "5. 해밍 거리"
+        ],
+        "correctAnswer": "3",
+        "explanation": "유클리드 거리는 다차원 공간에서 두 점(벡터) 사이의 가장 짧은 직선 거리를 의미합니다."
+    },
+    {
+        "id": 32,
+        "chapter": "2. 데이터 분석",
+        "question": "텍스트 데이터 분포 시각화 중 '단어 빈도 분포'를 표현하기에 가장 적합한 그래프는?",
+        "options": [
+            "1. 산점도 (Scatter plot)",
+            "2. 상위 n개 단어 막대그래프 (Bar chart)",
+            "3. 박스플롯 (Box plot)",
+            "4. 히트맵 (Heatmap)",
+            "5. 선 그래프 (Line chart)"
+        ],
+        "correctAnswer": "2",
+        "explanation": "가장 많이 등장한 단어들의 빈도수를 비교할 때는 막대그래프를 사용하는 것이 직관적입니다."
+    },
+    {
+        "id": 33,
+        "chapter": "2. 데이터 분석",
+        "question": "모든 원소가 1인 2x2 행렬을 생성하는 Numpy 코드는?",
+        "options": [
+            "1. np.zeros((2, 2))",
+            "2. np.ones((2, 2))",
+            "3. np.eye(2)",
+            "4. np.empty((2, 2))",
+            "5. np.full((2, 2), 0)"
+        ],
+        "correctAnswer": "2",
+        "explanation": "`np.ones((행, 열))` 함수는 지정한 크기의 배열을 생성하고 모든 값을 1로 채웁니다."
+    },
+    {
+        "id": 34,
+        "chapter": "2. 데이터 분석",
+        "question": "`np.arange(0, 10, 2)`의 실행 결과로 올바른 것은?",
+        "options": [
+            "1. [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]",
+            "2. [0, 2, 4, 6, 8, 10]",
+            "3. [0, 2, 4, 6, 8]",
+            "4. [2, 4, 6, 8]",
+            "5. [0, 5, 10]"
+        ],
+        "correctAnswer": "3",
+        "explanation": "`np.arange(start, stop, step)`은 start부터 stop 미만까지 step 간격으로 배열을 생성하므로 0, 2, 4, 6, 8이 생성됩니다."
+    },
+    {
+        "id": 35,
+        "chapter": "2. 데이터 분석",
+        "question": "행렬 A의 행과 열을 바꾼 '전치 행렬'을 구하는 속성은?",
+        "options": [
+            "1. A.inv",
+            "2. A.T",
+            "3. A.reverse",
+            "4. A.swap",
+            "5. A.trans"
+        ],
+        "correctAnswer": "2",
+        "explanation": "Numpy 배열 객체의 `.T` 속성을 사용하면 전치 행렬(Transpose Matrix)을 얻을 수 있습니다."
+    },
+    {
+        "id": 36,
+        "chapter": "2. 데이터 분석",
+        "question": "`df.shape` 속성이 반환하는 정보는?",
+        "options": [
+            "1. 데이터프레임의 전체 원소 개수",
+            "2. 데이터프레임의 행과 열의 크기 (행, 열)",
+            "3. 데이터프레임의 컬럼 이름 리스트",
+            "4. 데이터프레임의 인덱스 정보",
+            "5. 데이터프레임의 메모리 사용량"
+        ],
+        "correctAnswer": "2",
+        "explanation": "`shape` 속성은 데이터프레임의 차원을 튜플 형태인 `(행의 개수, 열의 개수)`로 반환합니다."
+    },
+    {
+        "id": 37,
+        "chapter": "2. 데이터 분석",
+        "question": "데이터프레임 `df`의 컬럼 이름들을 확인하고 싶을 때 사용하는 속성은?",
+        "options": [
+            "1. df.index",
+            "2. df.values",
+            "3. df.columns",
+            "4. df.keys()",
+            "5. df.items()"
+        ],
+        "correctAnswer": "3",
+        "explanation": "`df.columns` 속성을 통해 데이터프레임에 존재하는 열(컬럼)의 이름들을 확인할 수 있습니다."
+    },
+    {
+        "id": 38,
+        "chapter": "2. 데이터 분석",
+        "question": "데이터프레임 `df`를 JSON 파일로 저장하는 메서드는?",
+        "options": [
+            "1. df.save_json()",
+            "2. df.to_json()",
+            "3. df.write_json()",
+            "4. df.export_json()",
+            "5. df.dump_json()"
+        ],
+        "correctAnswer": "2",
+        "explanation": "Pandas는 `to_csv`, `to_json` 등 `to_포맷` 형태의 메서드로 데이터를 저장합니다."
+    },
+    {
+        "id": 39,
+        "chapter": "2. 데이터 분석",
+        "question": "TF-IDF 계산 시 IDF(Inverse Document Frequency) 값에 로그(log)를 취하는 주된 이유는?",
+        "options": [
+            "1. 값을 음수로 만들기 위해",
+            "2. 계산 속도를 늦추기 위해",
+            "3. 문서 빈도가 적은 단어의 중요도가 기하급수적으로 커지는 것을 방지하기 위해",
+            "4. 모든 값을 0과 1 사이로 맞추기 위해",
+            "5. 정수값만 사용하기 위해"
+        ],
+        "correctAnswer": "3",
+        "explanation": "IDF 계산 시 전체 문서 수 / 특정 단어 문서 수가 매우 커질 수 있으므로, 로그를 취해 값의 스케일을 조정하고 지나친 가중치 부여를 완화합니다."
+    },
+    {
+        "id": 40,
+        "chapter": "2. 데이터 분석",
+        "question": "RAG(검색 증강 생성) 시스템이나 검색 엔진에서 질문과 가장 관련성 높은 문서를 찾을 때 주로 활용되는 기술은?",
+        "options": [
+            "1. 데이터 정렬",
+            "2. 문서 유사도(코사인 유사도 등) 측정",
+            "3. 이미지 캡셔닝",
+            "4. 음성 인식",
+            "5. 데이터 압축"
+        ],
+        "correctAnswer": "2",
+        "explanation": "RAG 및 검색 시스템에서는 질문을 벡터로 변환한 후, 저장된 문서 벡터들과 코사인 유사도 등을 계산하여 가장 유사한(관련성 높은) 문서를 찾아냅니다."
+    },
+    {
+        "id": 41,
+        "chapter": "3. LLM 기본",
+        "question": "마이크로소프트(MS)의 Phi 모델이 가진 특징으로 학습 노트에 언급된 내용은?",
+        "options": [
+            "1. 파라미터 수가 100B 이상인 초대형 모델이다.",
+            "2. GPT-3.5가 생성한 코드 데이터 등 '합성 데이터(Synthetic Data)'를 활용해 학습했다.",
+            "3. 한국어 처리 능력이 매우 뛰어나다.",
+            "4. 오직 이미지 생성만을 목적으로 한다.",
+            "5. 폐쇄형 모델로 다운로드가 불가능하다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "MS Phi 모델은 선대 LLM(GPT-3.5 등)이 생성한 고품질의 합성 데이터를 활용하여 작은 사이즈임에도 높은 코딩 성능 등을 보여주는 것이 특징입니다."
+    },
+    {
+        "id": 42,
+        "chapter": "3. LLM 기본",
+        "question": "알리바바가 개발한 오픈 모델로, 초기부터 다국어(Multilingual) 처리를 표방하여 성능이 우수한 모델은?",
+        "options": [
+            "1. Llama",
+            "2. Mistral",
+            "3. Gemma",
+            "4. Qwen",
+            "5. Phi"
+        ],
+        "correctAnswer": "4",
+        "explanation": "Qwen은 알리바바가 개발하였으며, 현존 오픈 모델 중 다국어 처리 능력이 매우 우수한 것으로 평가받습니다."
+    },
+    {
+        "id": 43,
+        "chapter": "3. LLM 기본",
+        "question": "16bit(2byte) 모델을 기준으로 할 때, 파라미터 수와 VRAM 소모량의 관계 계산식으로 옳은 것은?",
+        "options": [
+            "1. 파라미터 수(B) x 1 = 필요한 VRAM(GB)",
+            "2. 파라미터 수(B) x 2 = 필요한 VRAM(GB)",
+            "3. 파라미터 수(B) / 2 = 필요한 VRAM(GB)",
+            "4. 파라미터 수(B) x 4 = 필요한 VRAM(GB)",
+            "5. 파라미터 수와 VRAM은 관계가 없다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "16bit는 2byte이므로, 파라미터 수(Billion)에 2를 곱하면 대략적으로 필요한 VRAM 용량(GB)이 계산됩니다. (예: 7B -> 14GB)"
+    },
+    {
+        "id": 44,
+        "chapter": "3. LLM 기본",
+        "question": "모델의 가중치(Weight) 값을 줄여(예: FP16 -> INT8) 모델 크기를 작게 만드는 기술을 무엇이라 하는가?",
+        "options": [
+            "1. Distillation (증류)",
+            "2. Pruning (가지치기)",
+            "3. Quantization (양자화)",
+            "4. Augmentation (증강)",
+            "5. Normalization (정규화)"
+        ],
+        "correctAnswer": "3",
+        "explanation": "양자화(Quantization)는 가중치의 정밀도를 낮춰(비트 수를 줄여) 모델의 용량을 줄이고 추론 속도를 높이는 기술입니다."
+    },
+    {
+        "id": 45,
+        "chapter": "3. LLM 기본",
+        "question": "기존의 단순 양자화 방식의 한계를 극복하기 위해 제안된 'QLoRa'의 NF4(NormalFloat4) 방식의 특징은?",
+        "options": [
+            "1. 모든 파라미터를 무작위로 삭제한다.",
+            "2. 가중치의 분포(Distribution)를 기반으로 분위수 구간을 나누어 양자화한다.",
+            "3. 중요하지 않은 레이어를 통째로 제거한다.",
+            "4. 오직 정수(Integer)만 사용하여 연산한다.",
+            "5. 모델의 파라미터 수를 2배로 늘린다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "QLoRa의 NF4 양자화는 가중치 값의 전체 범위 분포를 고려하여 분위수 구간으로 나누고 대표값만 저장하는 방식을 사용하여 정보 손실을 줄입니다."
+    },
+    {
+        "id": 46,
+        "chapter": "3. LLM 기본",
+        "question": "파라미터의 중요도를 기반으로 차등 양자화를 적용하는 기법인 'GPTQ'의 특징은?",
+        "options": [
+            "1. 모든 파라미터를 동일한 비트로 양자화한다.",
+            "2. 중요한 파라미터는 적게 양자화하고, 덜 중요한 것은 크게 양자화한다.",
+            "3. CPU에서만 동작한다.",
+            "4. 학습 데이터가 필요 없다.",
+            "5. 이미지 처리에만 사용된다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "GPTQ는 파라미터의 중요도를 분석하여, 중요한 파라미터는 손실을 최소화하고 덜 중요한 파라미터는 압축률을 높이는 방식을 사용합니다."
+    },
+    {
+        "id": 47,
+        "chapter": "3. LLM 기본",
+        "question": "GGUF(또는 GGML) 포맷의 주요 장점으로 가장 적절한 것은?",
+        "options": [
+            "1. GPU가 필수적으로 요구된다.",
+            "2. Python 환경에서만 실행 가능하다.",
+            "3. CPU 추론에 최적화되어 있으며, 모델을 단일 파일로 저장하여 배포가 간편하다.",
+            "4. 학습 속도가 가장 빠르다.",
+            "5. 상용 모델에서만 지원한다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "GGUF는 C++ 기반 라이브러리(llama.cpp 등)에서 사용되며, CPU 환경에서도 효율적인 추론이 가능하고 단일 파일로 관리가 용이합니다."
+    },
+    {
+        "id": 48,
+        "chapter": "3. LLM 기본",
+        "question": "구글의 Gemma 모델 중, 멀티모달 기능을 탑재하여 출시된 모델의 명칭은?",
+        "options": [
+            "1. Gemma Ultra",
+            "2. PaliGemma (또는 Gemma 3)",
+            "3. Gemma Mini",
+            "4. Gemma Zero",
+            "5. Gemma Chat"
+        ],
+        "correctAnswer": "2",
+        "explanation": "Gemma 2에 SigLip 인코더를 결합하여 PaliGemma를 공개하였고, 이후 멀티모달 LLM인 Gemma 3가 출시되었습니다."
+    },
+    {
+        "id": 49,
+        "chapter": "3. LLM 기본",
+        "question": "큰 모델을 양자화해서 사용하는 것이 작은 모델을 그냥 사용하는 것보다 유리한 이유로 언급된 것은?",
+        "options": [
+            "1. 큰 모델이 학습 데이터 양이 더 많고, 레이어와 차원이 커서 표현력이 좋기 때문이다.",
+            "2. 양자화를 하면 파라미터 수가 늘어나기 때문이다.",
+            "3. 작은 모델은 양자화가 불가능하기 때문이다.",
+            "4. 큰 모델은 GPU를 사용하지 않기 때문이다.",
+            "5. 큰 모델이 전기세를 덜 먹기 때문이다."
+        ],
+        "correctAnswer": "1",
+        "explanation": "일반적으로 큰 모델은 더 많은 데이터와 깊은 레이어로 학습되었기 때문에, 이를 양자화하여 손실이 발생하더라도 처음부터 작은 모델보다 성능이 우수한 경우가 많습니다."
+    },
+    {
+        "id": 50,
+        "chapter": "3. LLM 기본",
+        "question": "OpenAI o1 모델과 같이 '생각할 시간(Thinking)'을 주는 모델이 수행하는 과정 중 'Self-Refinement'의 의미는?",
+        "options": [
+            "1. 문제를 하위 문제로 분할한다.",
+            "2. 알려진 문제 해결법을 그대로 적용한다.",
+            "3. 자체 평가를 통해 오류를 검출하고 수정한다.",
+            "4. 외부 검색 엔진을 사용한다.",
+            "5. 사용자의 질문을 무시한다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "Self-Refinement는 모델이 내놓은 중간 결과나 사고 과정에 대해 스스로 평가하고, 오류가 있다면 수정하여 정답률을 높이는 과정입니다."
+    },
+    {
+        "id": 51,
+        "chapter": "3. LLM 기본",
+        "question": "sLLM(Small LLM)을 만들기 위한 기법 중, 큰 모델(Teacher)의 출력을 작은 모델(Student)이 학습하게 하여 성능을 모사하는 기법은?",
+        "options": [
+            "1. Pruning (가지치기)",
+            "2. Distillation (증류)",
+            "3. Quantization (양자화)",
+            "4. RAG",
+            "5. Prompt Engineering"
+        ],
+        "correctAnswer": "2",
+        "explanation": "지식 증류(Knowledge Distillation)는 고성능의 큰 모델이 생성한 데이터를 이용해 작은 모델을 학습시켜, 작은 모델이 큰 모델의 성능을 따라가도록 만드는 기법입니다."
+    },
+    {
+        "id": 52,
+        "chapter": "3. LLM 기본",
+        "question": "LLM에게 외부 함수나 API를 호출할 수 있는 능력을 부여하여, 텍스트 생성을 넘어 작업을 수행하게 만드는 시스템을 무엇이라 하는가?",
+        "options": [
+            "1. Quantizer",
+            "2. Tokenizer",
+            "3. Agent",
+            "4. Embedder",
+            "5. Decoder"
+        ],
+        "correctAnswer": "3",
+        "explanation": "Agent는 LLM이 Tool Calling 기능을 통해 외부 도구(검색, 계산기, API 등)를 스스로 호출하고 사용하여 복잡한 작업을 수행하는 시스템입니다."
+    },
+    {
+        "id": 53,
+        "chapter": "3. LLM 기본",
+        "question": "학습 노트에서 언급된 국내(한국)의 대표적인 LLM 모델이 아닌 것은?",
+        "options": [
+            "1. Naver HyperCLOVA",
+            "2. LG EXAONE",
+            "3. Kakao Kanana",
+            "4. Upstage Solar",
+            "5. Alibaba Qwen"
+        ],
+        "correctAnswer": "5",
+        "explanation": "Qwen은 중국 알리바바(Alibaba)가 개발한 모델입니다. 나머지는 모두 한국 기업이 개발한 모델입니다."
+    },
+    {
+        "id": 54,
+        "chapter": "3. LLM 기본",
+        "question": "LLM 어플리케이션 개발 프레임워크인 'LangChain'의 특징으로 옳은 것은?",
+        "options": [
+            "1. 오직 OpenAI 모델만 사용할 수 있다.",
+            "2. 다양한 도구와 추상화(Abstraction)를 지원하여 AI 배경지식이 적어도 개발이 가능하다.",
+            "3. Python은 지원하지 않고 C++만 지원한다.",
+            "4. 실행 속도가 타 라이브러리보다 월등히 빠르다.",
+            "5. 모델의 파라미터를 직접 수정할 수 있다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "LangChain은 LLM 앱 개발을 위한 추상화된 인터페이스를 제공하여 개발 진입 장벽을 낮춰주며, 다양한 LLM Provider를 쉽게 교체하여 사용할 수 있습니다."
+    },
+    {
+        "id": 55,
+        "chapter": "3. LLM 기본",
+        "question": "Mistral 모델의 특징 중 하나로, 여러 개의 전문가 모델을 섞어 만든 구조는?",
+        "options": [
+            "1. CNN",
+            "2. RNN",
+            "3. MoE (Mixture of Experts)",
+            "4. GAN",
+            "5. LSTM"
+        ],
+        "correctAnswer": "3",
+        "explanation": "Mistral은 MoE(Mixture of Experts) 아키텍처를 채택하여 성능과 효율성을 동시에 확보한 모델(Mixtral 등)을 출시했습니다."
+    },
+    {
+        "id": 56,
+        "chapter": "3. LLM 기본",
+        "question": "QAT(Quantization Aware Training) 기법의 특징은?",
+        "options": [
+            "1. 학습이 다 끝난 후에만 양자화를 진행한다.",
+            "2. 학습 단계에서부터 양자화를 고려하여, 중간중간 양자화 적용/해제를 반복하며 학습한다.",
+            "3. 하드웨어 가속기가 없으면 사용할 수 없다.",
+            "4. 모델의 크기를 키우는 기술이다.",
+            "5. 데이터 전처리에만 사용된다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "QAT는 학습 도중에 양자화로 인한 오차를 미리 시뮬레이션하고 이를 보정하도록 학습하여, 양자화 후에도 성능 저하를 최소화하는 기법입니다."
+    },
+    {
+        "id": 57,
+        "chapter": "3. LLM 기본",
+        "question": "Gemma 3n 모델에서 적용된 '동적 파라미터 선택' 기술의 주된 목적은?",
+        "options": [
+            "1. 서버 비용을 늘리기 위해",
+            "2. 온디바이스 환경에서 GPU 소모를 최소화하고 효율적으로 실행하기 위해",
+            "3. 이미지 화질을 개선하기 위해",
+            "4. 클라우드 API 호출을 강제하기 위해",
+            "5. 모델의 학습 시간을 줄이기 위해"
+        ],
+        "correctAnswer": "2",
+        "explanation": "입력에 따라 필요한 파라미터만 동적으로 선택하여 연산함으로써, 자원이 제한된 온디바이스 환경에서도 효율적으로 동작하게 합니다."
+    },
+    {
+        "id": 58,
+        "chapter": "3. LLM 기본",
+        "question": "OpenAI o1 모델이 문제를 해결할 때 6가지 패턴 중 'Divide and Conquer'는 무엇을 의미하는가?",
+        "options": [
+            "1. 문제를 포기하고 다른 문제를 푼다.",
+            "2. 복잡한 문제를 하위 문제로 분할하여 해결한다.",
+            "3. 모든 데이터를 한 번에 처리한다.",
+            "4. 외부 전문가에게 질문한다.",
+            "5. 정답을 찍어서 맞춘다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "Divide and Conquer(분할 정복)는 큰 문제를 해결 가능한 작은 단위의 하위 문제들로 나누어 순차적으로 해결하는 사고 방식입니다."
+    },
+    {
+        "id": 59,
+        "chapter": "3. LLM 기본",
+        "question": "모델 경량화 기법 중 '가지치기(Pruning)'의 개념은?",
+        "options": [
+            "1. 데이터를 더 많이 추가하는 것",
+            "2. 중요도가 낮은 뉴런(레이어, 차원)을 제거하여 모델 크기를 줄이는 것",
+            "3. 모델을 여러 개 복사하는 것",
+            "4. 학습률을 높이는 것",
+            "5. 입력 텍스트를 요약하는 것"
+        ],
+        "correctAnswer": "2",
+        "explanation": "Pruning은 모델의 성능에 큰 영향을 주지 않는 불필요한 가중치나 연결을 삭제하여 모델을 가볍게 만드는 기법입니다."
+    },
+    {
+        "id": 60,
+        "chapter": "3. LLM 기본",
+        "question": "현업에서 LLM 어플리케이션을 개발할 때 모델 자체보다 더 중요하게 고려되는 요소가 아닌 것은?",
+        "options": [
+            "1. 양질의 데이터 수급 파이프라인",
+            "2. 결과에 대한 신뢰성 있는 평가 방식",
+            "3. 실제 데이터 기반의 수행 능력 검증",
+            "4. 무조건 가장 파라미터가 많은 최신 모델 사용",
+            "5. 데이터 전처리 과정"
+        ],
+        "correctAnswer": "4",
+        "explanation": "무조건 큰 모델을 쓰는 것보다, 실제 데이터에 맞는 적절한 크기의 모델을 선택하고 데이터 파이프라인과 평가 시스템을 구축하는 것이 더 중요합니다."
+    },
+    {
+        "id": 61,
+        "chapter": "3. LLM 기본",
+        "question": "트랜스포머(Transformer) 내부의 'Linear' 레이어와 'Softmax' 함수의 역할로 가장 적절한 것은?",
+        "options": [
+            "1. 입력된 텍스트를 토큰으로 자른다.",
+            "2. 벡터를 토큰의 가짓수만큼 확장하고, 확률 분포로 변환하여 다음 단어를 선택(샘플링)하게 한다.",
+            "3. 문장의 순서 정보를 주입한다.",
+            "4. 입력 문장의 길이를 줄인다.",
+            "5. 이미지를 텍스트로 변환한다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "Linear 레이어는 벡터 차원을 전체 단어 집합(Vocabulary) 크기로 확장하고, Softmax는 이를 확률 분포로 변환하여 가장 적절한 다음 토큰을 선택할 수 있게 합니다."
+    },
+    {
+        "id": 62,
+        "chapter": "3. LLM 기본",
+        "question": "트랜스포머 구조 내의 'Add & Norm' 과정이 수행하는 역할은?",
+        "options": [
+            "1. 데이터를 삭제하여 용량을 줄인다.",
+            "2. 레이어를 통과한 결과와 통과하기 전의 결과를 합치고(Residual Connection), 평균(Normalization)을 낸다.",
+            "3. 두 개의 모델을 하나로 합친다.",
+            "4. 학습 데이터를 무작위로 섞는다.",
+            "5. 텍스트를 음성으로 변환한다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "Add & Norm은 정보 손실을 막고 학습을 안정화하기 위해 잔차 연결(Add)과 정규화(Norm)를 수행하는 과정입니다."
+    },
+    {
+        "id": 63,
+        "chapter": "3. LLM 기본",
+        "question": "디코더(Decoder)에서 사용하는 'Masked Self-Attention'의 특징은?",
+        "options": [
+            "1. 문장의 앞뒤 모든 문맥을 참고한다.",
+            "2. 미래에 나올 단어를 미리 보고 예측한다.",
+            "3. 현재 생성하려는 위치보다 앞에 있는 단어들만 참고하여 순차적으로 출력한다.",
+            "4. 이미지를 픽셀 단위로 분석한다.",
+            "5. 어텐션 연산을 수행하지 않는다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "디코더는 언어 생성 시 아직 나오지 않은 뒷부분을 미리 보면 안 되므로, Masking을 통해 자신의 앞쪽 토큰들만 보면서 다음 토큰을 예측합니다."
+    },
+    {
+        "id": 64,
+        "chapter": "3. LLM 기본",
+        "question": "양자화 기법 중 하나인 'AWQ(Activation-aware Weight Quantization)'의 핵심 원리는?",
+        "options": [
+            "1. 모든 가중치를 무작위로 삭제한다.",
+            "2. 레이어 단위로 입력 활성화(Activation) 값을 확인하여, 가중치의 중요도를 반영해 양자화한다.",
+            "3. 학습 데이터를 10배로 늘린다.",
+            "4. 오직 CPU에서만 작동하도록 제한한다.",
+            "5. 모델의 파라미터 수를 강제로 줄인다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "AWQ는 가중치가 실제로 얼마나 활성화되는지(Activation)를 확인하여, 중요한 가중치는 보존하고 덜 중요한 가중치는 더 많이 압축하는 효율적인 방식입니다."
+    },
+    {
+        "id": 65,
+        "chapter": "3. LLM 기본",
+        "question": "앤트로픽(Anthropic)의 실험인 'Project Vend'에서 Claude에게 냉장고 판매 경영을 맡겼을 때 발생한 문제는?",
+        "options": [
+            "1. 재고 관리를 전혀 하지 못했다.",
+            "2. 직원(고객의 80%)의 요청에 휘둘려 원가 이하 판매 및 할인을 남발했다.",
+            "3. 계산 실수를 너무 많이 했다.",
+            "4. 고객에게 욕설을 했다.",
+            "5. 아무런 응답을 하지 않았다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "Claude는 인간(직원/고객)의 요청을 너무 잘 들어주려는 경향 때문에 과도한 할인과 원가 이하 판매를 승인하여 경영 효율성이 떨어지는 문제를 보였습니다."
+    },
+    {
+        "id": 66,
+        "chapter": "3. LLM 기본",
+        "question": "PaperBench 사례에서 Agent가 수행한 작업 흐름으로 옳은 것은?",
+        "options": [
+            "1. 논문 읽기 -> 요약하기 -> 번역하기",
+            "2. 논문 읽기 -> 코드가 없어도 내용 바탕으로 코드 작성 -> 실행 및 결과 검증",
+            "3. 논문 읽기 -> 저자에게 이메일 보내기",
+            "4. 코드만 읽고 논문 작성하기",
+            "5. 이미지 보고 논문 제목 맞히기"
+        ],
+        "correctAnswer": "2",
+        "explanation": "PaperBench는 에이전트가 논문을 읽고 구현 코드가 없는 상태에서도 스스로 코드를 작성하고 실행하여 결과를 검증하는 능력을 보여준 사례입니다."
+    },
+    {
+        "id": 67,
+        "chapter": "3. LLM 기본",
+        "question": "LLM이 스스로 사고 과정을 거칠 때, 너무 많이 생각하여 오히려 성능이 저하되는 현상을 무엇이라 하는가?",
+        "options": [
+            "1. Hallucination",
+            "2. Overfitting",
+            "3. Over Thinking",
+            "4. Underfitting",
+            "5. Vanishing Gradient"
+        ],
+        "correctAnswer": "3",
+        "explanation": "Thinking 토큰 등을 통해 추론 시간을 길게 가져갈 때, 불필요하게 복잡하게 생각하거나 스스로를 과도하게 의심하여 답을 틀리는 것을 Over Thinking이라고 합니다."
+    },
+    {
+        "id": 68,
+        "chapter": "3. LLM 기본",
+        "question": "기존 LLM에 Vision 기능을 결합할 때, 이미지 인코더(Vision Encoder)가 이해한 벡터를 언어 모델의 벡터로 변환시켜 주는 층(Layer)은?",
+        "options": [
+            "1. Softmax Layer",
+            "2. Projection Layer",
+            "3. Convolution Layer",
+            "4. Pooling Layer",
+            "5. Dropout Layer"
+        ],
+        "correctAnswer": "2",
+        "explanation": "이미지 인코더의 출력 벡터 공간과 LLM의 텍스트 벡터 공간이 다르기 때문에, 이를 연결(매핑)해주는 Projection Layer가 필요합니다."
+    },
+    {
+        "id": 69,
+        "chapter": "3. LLM 기본",
+        "question": "학습 노트에 따르면, 일반적으로 LLM 어플리케이션에서 '쓸 만한 성능'을 보여준다고 언급된 모델의 파라미터 크기 기준은?",
+        "options": [
+            "1. 1B 이상",
+            "2. 3B 이상",
+            "3. 7B 이상",
+            "4. 10B 이상",
+            "5. 100B 이상"
+        ],
+        "correctAnswer": "4",
+        "explanation": "노트에서는 LLM 어플리케이션 개발 시 일반적으로 10B(100억 개) 이상의 모델이 쓸 만한 성능을 낸다고 언급하고 있습니다."
+    },
+    {
+        "id": 70,
+        "chapter": "3. LLM 기본",
+        "question": "LLM의 출력을 인간 선호도에 맞게 조정하는 과정에서, 질문과 답변을 보고 '좋은 답변'인지 점수(숫자)를 매기도록 학습된 모델은?",
+        "options": [
+            "1. Reward Model (보상 모델)",
+            "2. Generator Model",
+            "3. Discriminator Model",
+            "4. Diffusion Model",
+            "5. Vision Model"
+        ],
+        "correctAnswer": "1",
+        "explanation": "RLHF 과정에서 라벨링 정보를 토대로 좋은 답변에 높은 점수를 주도록 학습된 모델을 Reward Model(보상 모델)이라고 합니다."
+    },
+    {
+        "id": 71,
+        "chapter": "3. LLM 기본",
+        "question": "네이버(Naver)가 개발한 한국의 대표적인 LLM 모델 명칭은?",
+        "options": [
+            "1. Kanana",
+            "2. Solar",
+            "3. HyperCLOVA",
+            "4. EXAONE",
+            "5. Qwen"
+        ],
+        "correctAnswer": "3",
+        "explanation": "HyperCLOVA(하이퍼클로바)는 네이버가 개발한 초대규모 AI 모델입니다."
+    },
+    {
+        "id": 72,
+        "chapter": "3. LLM 기본",
+        "question": "구글의 Gemma 2에 SigLip 인코더를 결합하여 만든 멀티모달 모델의 이름은?",
+        "options": [
+            "1. PaliGemma",
+            "2. Llama Vision",
+            "3. GPT-4o",
+            "4. Claude 3.5 Sonnet",
+            "5. Mistral Large"
+        ],
+        "correctAnswer": "1",
+        "explanation": "구글은 텍스트 모델인 Gemma 2와 이미지 인코더 SigLip을 결합하여 PaliGemma라는 멀티모달 모델을 공개했습니다."
+    },
+    {
+        "id": 73,
+        "chapter": "3. LLM 기본",
+        "question": "오픈 모델(Llama 등)을 활용할 때의 단점으로 가장 적절한 것은?",
+        "options": [
+            "1. 파인튜닝이 불가능하다.",
+            "2. 프라이버시 보호가 안 된다.",
+            "3. GPU 자원과 비용이 많이 들며 계산량이 많다.",
+            "4. 한국어를 전혀 사용할 수 없다.",
+            "5. API 호출 비용이 상용 모델보다 비싸다."
+        ],
+        "correctAnswer": "3",
+        "explanation": "오픈 모델은 직접 호스팅해야 하므로 고성능 GPU 장비, 전력 비용, 유지보수 등의 자원과 비용 부담이 단점입니다."
+    },
+    {
+        "id": 74,
+        "chapter": "3. LLM 기본",
+        "question": "다음 중 '작은 모델(Small Model)'의 일반적인 특징으로 언급된 것은?",
+        "options": [
+            "1. Context Window가 매우 길다.",
+            "2. Input/Output 임베딩이 간소화되어 있고 Context Window가 짧은 편이다.",
+            "3. 추론 속도가 매우 느리다.",
+            "4. 파라미터 수가 100B를 넘는다.",
+            "5. 멀티모달 기능이 기본적으로 탑재되어 있다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "작은 모델은 경량화를 위해 임베딩 층을 간소화하거나 처리할 수 있는 문맥 길이(Context Window)를 짧게 설정하는 경향이 있습니다."
+    },
+    {
+        "id": 75,
+        "chapter": "3. LLM 기본",
+        "question": "LangChain 프레임워크의 단점으로 언급된 내용은?",
+        "options": [
+            "1. 사용이 너무 복잡해서 전문가만 쓸 수 있다.",
+            "2. 약간 느릴 수 있으며, 원하는 특정 기능을 구현하는 데 제약이 있을 수 있다.",
+            "3. 유료로만 사용할 수 있다.",
+            "4. Java 언어만 지원한다.",
+            "5. 문서화가 전혀 되어 있지 않다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "LangChain은 추상화로 인해 편리하지만, 그만큼 오버헤드로 인해 실행 속도가 느리거나 고도로 커스터마이징 된 기능을 구현할 때 제약이 발생할 수 있습니다."
+    },
+    {
+        "id": 76,
+        "chapter": "3. LLM 기본",
+        "question": "파이썬 코드가 아닌 C++ 기반으로 LLM을 실행하며, CPU 추론에 최적화된 라이브러리 포맷은?",
+        "options": [
+            "1. ONNX",
+            "2. TensorFlow Lite",
+            "3. GGUF (llama.cpp 기반)",
+            "4. PyTorch Mobile",
+            "5. TensorRT"
+        ],
+        "correctAnswer": "3",
+        "explanation": "GGUF(과거 GGML) 포맷은 llama.cpp 라이브러리에서 사용하며, C++ 기반으로 작성되어 CPU에서도 효율적으로 LLM을 구동할 수 있습니다."
+    },
+    {
+        "id": 77,
+        "chapter": "3. LLM 기본",
+        "question": "트랜스포머의 'Self-Attention' 층을 N번 반복(Nx)하는 이유는?",
+        "options": [
+            "1. 단순히 모델의 크기를 키우기 위해서",
+            "2. 비선형성을 추가하고 깊은 관계를 학습하여 복잡한 언어 패턴을 이해하기 위해서",
+            "3. 처리 속도를 늦추기 위해서",
+            "4. 입력 데이터를 복사하기 위해서",
+            "5. 전력 소모를 늘리기 위해서"
+        ],
+        "correctAnswer": "2",
+        "explanation": "딥러닝에서 층을 깊게 쌓는 것은 비선형성을 통해 데이터 내의 복잡하고 추상적인 관계를 단계적으로 깊이 있게 학습하기 위함입니다."
+    },
+    {
+        "id": 78,
+        "chapter": "3. LLM 기본",
+        "question": "OpenAI o1 모델의 사고 패턴 중 'Method Reuse'의 의미는?",
+        "options": [
+            "1. 새로운 방법을 창조한다.",
+            "2. 알려진 문제 해결법(유사한 풀이법)을 적용한다.",
+            "3. 문제를 포기한다.",
+            "4. 사용자의 질문을 반복한다.",
+            "5. 외부 도구를 호출한다."
+        ],
+        "correctAnswer": "2",
+        "explanation": "Method Reuse는 과거에 학습했거나 이미 알고 있는 문제 해결 패턴 및 방법론을 현재 문제에 재사용하여 효율적으로 답을 찾는 방식입니다."
+    },
+    {
+        "id": 79,
+        "chapter": "3. LLM 기본",
+        "question": "LLM이 외부 함수 호출 기능을 탑재하여 'Tasker'에서 'Giver'로, 즉 단순 정보 전달에서 과제 수행 주체로 진화한 형태를 부르는 말은?",
+        "options": [
+            "1. Chatbot",
+            "2. Agent",
+            "3. Search Engine",
+            "4. Database",
+            "5. Compiler"
+        ],
+        "correctAnswer": "2",
+        "explanation": "Agent는 LLM이 도구(Tool)를 사용하고, 계획을 세우며, 실제 행동(Action)을 통해 작업을 완수하는 자율적인 시스템을 의미합니다."
+    },
+    {
+        "id": 80,
+        "chapter": "3. LLM 기본",
+        "question": "BERT 모델은 트랜스포머의 어떤 구조를 활용하여 만들어졌는가?",
+        "options": [
+            "1. Encoder (인코더)",
+            "2. Decoder (디코더)",
+            "3. Encoder-Decoder 결합",
+            "4. RNN",
+            "5. CNN"
+        ],
+        "correctAnswer": "1",
+        "explanation": "BERT(Bidirectional Encoder Representations from Transformers)는 트랜스포머의 인코더 구조를 사용하여 문장의 양방향 문맥을 파악하는 데 특화된 모델입니다."
+    },
+    {
+        "id": 81,
+        "chapter": "2. 데이터 분석",
+        "question": "Numpy 코드 `np.dot(np.array([1, 2, 3]), np.array([4, 5, 6]))`의 연산 결과는?",
+        "options": [
+            "1. [4, 10, 18]",
+            "2. 32",
+            "3. 15",
+            "4. [5, 7, 9]",
+            "5. 0"
+        ],
+        "correctAnswer": "2",
+        "explanation": "내적(Dot Product)은 각 요소끼리 곱한 후 그 합을 구하는 연산입니다. (1*4 + 2*5 + 3*6) = 4 + 10 + 18 = 32가 됩니다."
+    },
+    {
+        "id": 82,
+        "chapter": "2. 데이터 분석",
+        "question": "Pandas DataFrame에서 '또는(OR)' 조건을 적용하여 데이터를 필터링할 때 사용하는 연산자는?",
+        "options": [
+            "1. &",
+            "2. |",
+            "3. ^",
+            "4. or",
+            "5. ~"
+        ],
+        "correctAnswer": "2",
+        "explanation": "Pandas의 조건식 필터링에서 OR 연산은 파이프(`|`) 기호를 사용합니다. (`&`는 AND)"
+    },
+    {
+        "id": 83,
+        "chapter": "2. 데이터 분석",
+        "question": "텍스트 전처리 단계 중 '정제(Cleaning)'의 주된 작업으로 옳은 것은?",
+        "options": [
+            "1. HTML 태그, URL, 이모지 등 노이즈 제거",
+            "2. 단어의 품사를 분석",
+            "3. 문장을 단어 단위로 쪼개기",
+            "4. 단어의 빈도수 계산",
+            "5. 유사도 행렬 생성"
+        ],
+        "correctAnswer": "1",
+        "explanation": "정제(Cleaning)는 분석에 불필요한 노이즈(HTML 태그, 특수문자, 공백 등)를 제거하여 데이터의 품질을 높이는 과정입니다."
+    },
+    {
+        "id": 84,
+        "chapter": "2. 데이터 분석",
+        "question": "Pandas에서 두 개의 데이터프레임을 특정 컬럼(Key)을 기준으로 SQL의 JOIN처럼 합치는 함수는?",
+        "options": [
+            "1. merge()",
+            "2. concat()",
+            "3. join()",
+            "4. union()",
+            "5. append()"
+        ],
+        "correctAnswer": "1",
+        "explanation": "`merge()` 함수는 공통된 키를 기준으로 데이터를 병합(Join)하는 가장 대표적인 Pandas 함수입니다."
+    },
+    {
+        "id": 85,
+        "chapter": "2. 데이터 분석",
+        "question": "Pandas에서 데이터를 특정 기준(컬럼)으로 묶어서 통계 계산을 하기 위해 사용하는 그룹화 메서드는?",
+        "options": [
+            "1. sort_values()",
+            "2. groupby()",
+            "3. gather()",
+            "4. cluster()",
+            "5. aggregate()"
+        ],
+        "correctAnswer": "2",
+        "explanation": "`groupby()`를 사용하면 데이터를 그룹별로 나누고, 이후 `sum()`, `mean()`, `agg()` 등을 통해 통계 연산을 수행할 수 있습니다."
+    },
+    {
+        "id": 86,
+        "chapter": "2. 데이터 분석",
+        "question": "텍스트 데이터 분석 시 사용하는 정규표현식 패턴 `[a-zA-Z]+`가 의미하는 것은?",
+        "options": [
+            "1. 모든 숫자",
+            "2. 모든 한글",
+            "3. 모든 영문자(대소문자 포함)",
+            "4. 특수문자만",
+            "5. 공백 문자"
+        ],
+        "correctAnswer": "3",
+        "explanation": "`[a-z]`는 소문자, `[A-Z]`는 대문자, `+`는 1개 이상의 반복을 의미하므로 영문 알파벳 전체를 매칭합니다."
+    },
+    {
+        "id": 87,
+        "chapter": "2. 데이터 분석",
+        "question": "TF-IDF 알고리즘의 구성 요소인 TF와 IDF의 곱셈(Product)이 의미하는 바는?",
+        "options": [
+            "1. 단어의 전체 개수",
+            "2. 단어의 상대적 중요도",
+            "3. 문서의 길이",
+            "4. 문장의 개수",
+            "5. 오타의 개수"
+        ],
+        "correctAnswer": "2",
+        "explanation": "TF(빈도)와 IDF(희귀도)를 곱함으로써, 자주 등장하지만(TF 높음) 흔하지 않은(IDF 높음) 핵심 단어의 중요도를 높게 평가합니다."
+    },
+    {
+        "id": 88,
+        "chapter": "2. 데이터 분석",
+        "question": "Bag of Words(BoW) 모델이 가진 한계점은?",
+        "options": [
+            "1. 단어의 순서를 무시하여 문맥 파악이 어렵다.",
+            "2. 계산이 너무 복잡하다.",
+            "3. 단어의 빈도를 측정할 수 없다.",
+            "4. 숫자 데이터를 처리할 수 없다.",
+            "5. 구현이 불가능하다."
+        ],
+        "correctAnswer": "1",
+        "explanation": "BoW는 단어들의 가방이라는 이름처럼, 순서는 고려하지 않고 오직 출현 빈도만 벡터화하기 때문에 문맥 정보를 잃어버리는 단점이 있습니다."
+    },
+    {
+        "id": 89,
+        "chapter": "2. 데이터 분석",
+        "question": "Pandas에서 함수(lambda 등)를 DataFrame의 컬럼에 일괄 적용하여 데이터를 변환할 때 쓰는 메서드는?",
+        "options": [
+            "1. apply()",
+            "2. run()",
+            "3. execute()",
+            "4. map_apply()",
+            "5. transform_all()"
+        ],
+        "correctAnswer": "1",
+        "explanation": "`apply()` 메서드는 사용자 정의 함수나 람다 함수를 데이터프레임의 행이나 열 전체에 적용할 때 사용합니다."
+    },
+    {
+        "id": 90,
+        "chapter": "2. 데이터 분석",
+        "question": "Numpy에서 `np.zeros((3, 3))` 함수가 생성하는 배열은?",
+        "options": [
+            "1. 3x3 크기의 1로 채워진 행렬",
+            "2. 3x3 크기의 0으로 채워진 행렬",
+            "3. 3x3 크기의 난수 행렬",
+            "4. [0, 1, 2]가 3번 반복되는 행렬",
+            "5. 대각선만 1인 행렬"
+        ],
+        "correctAnswer": "2",
+        "explanation": "`np.zeros((행, 열))`은 해당 크기의 모든 원소가 0인 영행렬을 생성합니다."
+    },
+    {
+        "id": 91,
+        "chapter": "2. 데이터 분석",
+        "question": "텍스트 정규화(Normalization)의 목적으로 가장 적절한 것은?",
+        "options": [
+            "1. 텍스트를 표준 형태로 변환하여 단어의 종류(Vocabulary)를 줄이고 처리를 효율화한다.",
+            "2. 텍스트를 암호화하여 보안을 강화한다.",
+            "3. 텍스트의 길이를 무조건 늘린다.",
+            "4. 이미지를 텍스트로 변환한다.",
+            "5. 모든 단어를 제거한다."
+        ],
+        "correctAnswer": "1",
+        "explanation": "대소문자 통일, 오타 교정, 유사 표현 통합 등을 통해 처리해야 할 토큰의 수를 줄이고 데이터를 표준화하는 것이 정규화의 목적입니다."
+    },
+    {
+        "id": 92,
+        "chapter": "2. 데이터 분석",
+        "question": "추천 시스템이나 RAG에서 두 문서(벡터)의 유사성을 판단할 때, '방향'을 기준으로 측정하는 지표는?",
+        "options": [
+            "1. 코사인 유사도 (Cosine Similarity)",
+            "2. 유클리드 거리",
+            "3. 맨해튼 거리",
+            "4. 민코프스키 거리",
+            "5. 해밍 거리"
+        ],
+        "correctAnswer": "1",
+        "explanation": "코사인 유사도는 두 벡터 사잇각의 코사인 값을 이용하여 방향의 유사성을 측정하며, 문서의 길이에 덜 민감합니다."
+    },
+    {
+        "id": 93,
+        "chapter": "2. 데이터 분석",
+        "question": "Pandas에서 JSON 형식의 파일을 로드하는 함수는?",
+        "options": [
+            "1. pd.read_csv()",
+            "2. pd.read_excel()",
+            "3. pd.read_json()",
+            "4. pd.read_sql()",
+            "5. pd.read_html()"
+        ],
+        "correctAnswer": "3",
+        "explanation": "JSON 파일을 읽어 DataFrame으로 변환하는 함수는 `pd.read_json()`입니다."
+    },
+    {
+        "id": 94,
+        "chapter": "2. 데이터 분석",
+        "question": "텍스트 분석에서 '불용어(Stopwords)'의 예시로 적절한 것은?",
+        "options": [
+            "1. 인공지능, 빅데이터",
+            "2. Apple, Samsung",
+            "3. 은, 는, 이, 가, 그리고",
+            "4. 2024년, 12월",
+            "5. 매우, 진짜, 완전"
+        ],
+        "correctAnswer": "3",
+        "explanation": "문장의 의미를 파악하는 데 큰 기여를 하지 않는 조사, 접속사 등이 대표적인 불용어입니다."
+    },
+    {
+        "id": 95,
+        "chapter": "2. 데이터 분석",
+        "question": "Numpy 배열 `A`의 행과 열을 맞바꾼 전치 행렬을 얻는 속성은?",
+        "options": [
+            "1. A.T",
+            "2. A.transpose()",
+            "3. A.swap",
+            "4. A.inv",
+            "5. A.reverse"
+        ],
+        "correctAnswer": "1",
+        "explanation": "Numpy 배열 객체의 `.T` 속성을 사용하면 전치 행렬(Transpose)을 쉽게 얻을 수 있습니다."
+    },
+    {
+        "id": 96,
+        "chapter": "2. 데이터 분석",
+        "question": "Pandas의 문자열 컬럼을 날짜/시간 객체로 변환해주는 함수는?",
+        "options": [
+            "1. pd.to_datetime()",
+            "2. pd.to_date()",
+            "3. pd.date_range()",
+            "4. pd.Timestamp()",
+            "5. pd.convert_time()"
+        ],
+        "correctAnswer": "1",
+        "explanation": "`pd.to_datetime()` 함수는 문자열 등을 Pandas의 datetime64 타입으로 변환하여 시계열 처리를 가능하게 합니다."
+    },
+    {
+        "id": 97,
+        "chapter": "2. 데이터 분석",
+        "question": "문서 간 유사도 행렬을 시각화할 때, 색상의 농도로 값을 표현하여 패턴을 보여주는 그래프는?",
+        "options": [
+            "1. 산점도",
+            "2. 히트맵 (Heatmap)",
+            "3. 막대그래프",
+            "4. 파이차트",
+            "5. 라인차트"
+        ],
+        "correctAnswer": "2",
+        "explanation": "히트맵은 2차원 데이터(행렬)의 값을 색상으로 시각화하여 데이터의 군집이나 유사도 패턴을 파악하기 좋습니다."
+    },
+    {
+        "id": 98,
+        "chapter": "2. 데이터 분석",
+        "question": "`df.info()` 메서드가 제공하지 않는 정보는?",
+        "options": [
+            "1. 전체 행(Row)의 개수",
+            "2. 각 컬럼의 데이터 타입(Dtype)",
+            "3. 결측치가 아닌 값의 개수",
+            "4. 메모리 사용량",
+            "5. 각 컬럼의 평균값"
+        ],
+        "correctAnswer": "5",
+        "explanation": "평균값과 같은 통계 정보는 `df.describe()`에서 제공하며, `df.info()`는 데이터 구조와 타입, 결측치 여부 등을 요약해줍니다."
+    },
+    {
+        "id": 99,
+        "chapter": "2. 데이터 분석",
+        "question": "Python의 리스트 `[1, 2, 3]`을 Numpy 배열로 변환하는 코드는?",
+        "options": [
+            "1. np.array([1, 2, 3])",
+            "2. np.list([1, 2, 3])",
+            "3. np.object([1, 2, 3])",
+            "4. np.convert([1, 2, 3])",
+            "5. np.vector([1, 2, 3])"
+        ],
+        "correctAnswer": "1",
+        "explanation": "`np.array()` 함수에 리스트를 전달하여 Numpy 배열(ndarray)을 생성합니다."
+    },
+    {
+        "id": 100,
+        "chapter": "2. 데이터 분석",
+        "question": "텍스트 전처리를 수행하는 근본적인 이유로 가장 적절한 것은?",
+        "options": [
+            "1. 데이터의 용량을 늘리기 위해",
+            "2. 불필요한 잡음(Noise)을 제거하고 데이터를 표준화하여 분석 모델의 성능을 높이기 위해",
+            "3. 데이터를 사람이 읽지 못하게 하기 위해",
+            "4. 모든 단어를 숫자로 바꾸지 않기 위해",
+            "5. 정규표현식을 사용해보고 싶어서"
+        ],
+        "correctAnswer": "2",
+        "explanation": "전처리는 원본 데이터에 포함된 태그, 특수문자 등 불필요한 요소를 제거하고 형식을 통일하여, 분석 모델이 데이터를 더 정확하게 학습하고 이해할 수 있도록 돕는 필수 과정입니다."
+    }
+]

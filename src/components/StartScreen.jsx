@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getDistinctIncorrectQuestions } from '../utils/storage';
 
 export default function StartScreen({ chapters, onStart }) {
     const [selectedChapters, setSelectedChapters] = useState([]);
     const [questionCount, setQuestionCount] = useState(20);
+    const [wrongQuestions, setWrongQuestions] = useState([]);
+
+    useEffect(() => {
+        setWrongQuestions(getDistinctIncorrectQuestions());
+    }, []);
 
     const toggleChapter = (chapter) => {
         setSelectedChapters(prev =>
@@ -23,6 +29,13 @@ export default function StartScreen({ chapters, onStart }) {
     const handleStart = () => {
         if (selectedChapters.length > 0) {
             onStart(selectedChapters, questionCount);
+        }
+    };
+
+    const handleRetryStart = () => {
+        if (wrongQuestions.length > 0) {
+            // Pass wrong questions as the first argument, length as count, and true for retry flag
+            onStart(wrongQuestions, wrongQuestions.length, true);
         }
     };
 
@@ -88,10 +101,29 @@ export default function StartScreen({ chapters, onStart }) {
                     className="btn-primary"
                     onClick={handleStart}
                     disabled={selectedChapters.length === 0}
-                    style={{ opacity: selectedChapters.length === 0 ? 0.5 : 1, width: '100%', fontSize: '1.1rem' }}
+                    style={{ opacity: selectedChapters.length === 0 ? 0.5 : 1, width: '100%', fontSize: '1.1rem', marginBottom: '1rem' }}
                 >
                     문제 풀기 시작
                 </button>
+
+                {wrongQuestions.length > 0 && (
+                    <button
+                        onClick={handleRetryStart}
+                        style={{
+                            width: '100%',
+                            padding: '1rem',
+                            background: 'rgba(239, 68, 68, 0.2)',
+                            color: 'var(--error)',
+                            border: '1px solid var(--error)',
+                            borderRadius: 'var(--radius-md)',
+                            fontSize: '1rem',
+                            fontWeight: '600',
+                            cursor: 'pointer'
+                        }}
+                    >
+                        오답 다시 풀기 ({wrongQuestions.length}문제)
+                    </button>
+                )}
             </div>
         </div>
     );

@@ -37,9 +37,19 @@ function App() {
   // Extract unique chapters
   const availableChapters = [...new Set(questionsData.map(q => q.chapter))].sort();
 
-  const handleStart = (selectedChapters, questionCount = 20) => {
-    // Filter questions based on selection
-    const questions = questionsData.filter(q => selectedChapters.includes(q.chapter));
+  const handleStart = (selectedChapters, questionCount = 20, isRetryMode = false) => {
+    let questions;
+
+    if (isRetryMode) {
+      // In retry mode, selectedChapters is the array of {id, chapter}
+      const wrongQs = selectedChapters;
+      questions = questionsData.filter(q =>
+        wrongQs.some(wq => wq.id === q.id && wq.chapter === q.chapter)
+      );
+    } else {
+      // Normal mode: Filter questions based on chapter selection
+      questions = questionsData.filter(q => selectedChapters.includes(q.chapter));
+    }
 
     // Shuffle and slice to user selected count (default 20)
     const shuffledQuestions = questions.sort(() => 0.5 - Math.random()).slice(0, questionCount);

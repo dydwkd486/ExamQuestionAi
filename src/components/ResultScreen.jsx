@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { saveQuizResult } from '../utils/storage';
 
 export default function ResultScreen({ questions, answers, onRestart }) {
     const [showExplanation, setShowExplanation] = useState({});
@@ -8,8 +9,6 @@ export default function ResultScreen({ questions, answers, onRestart }) {
         questions.forEach(q => {
             const userAnswer = answers[q.id];
             // Check if matches the pre-calculated correct answer text
-            // We use the new property _correctAnswerText if available
-            // Fallback to old logic if not (though implementation ensures it should be there)
             if (q._correctAnswerText) {
                 if (userAnswer === q._correctAnswerText) {
                     correctCount++;
@@ -24,6 +23,22 @@ export default function ResultScreen({ questions, answers, onRestart }) {
 
     const score = calculateScore();
     const percentage = Math.round((score / questions.length) * 100);
+
+    useEffect(() => {
+        const wrongQuestions = questions.filter(q => {
+            const userAnswer = answers[q.id];
+            if (q._correctAnswerText) {
+                return userAnswer !== q._correctAnswerText;
+            }
+            return !(userAnswer && userAnswer.startsWith(q.correctAnswer));
+        }).map(q => ({ id: q.id, chapter: q.chapter }));
+
+        saveQuizResult({
+            score,
+            total: questions.length,
+            wrongQuestions
+        });
+    }, []); // Run once on mount
 
     const toggleExplanation = (id) => {
         setShowExplanation(prev => ({ ...prev, [id]: !prev[id] }));
