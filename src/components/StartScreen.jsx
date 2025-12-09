@@ -75,7 +75,7 @@ export default function StartScreen({ chapters, onStart }) {
                 <input
                     type="range"
                     min="5"
-                    max="20"
+                    max="80"
                     step="1"
                     value={questionCount}
                     onChange={(e) => setQuestionCount(Number(e.target.value))}
