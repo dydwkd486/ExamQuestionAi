@@ -2,21 +2,40 @@ import { useState, useEffect } from 'react';
 import StartScreen from './components/StartScreen';
 import QuizScreen from './components/QuizScreen';
 import ResultScreen from './components/ResultScreen';
+import DataInputScreen from './components/DataInputScreen';
 import { loadAllQuestions } from './utils/questionLoader';
 
 import { prepareQuizQuestions } from './utils/quizLogic';
 
 function App() {
-  const [step, setStep] = useState('start'); // 'start', 'quiz', 'result'
+  const [step, setStep] = useState('start'); // 'start', 'quiz', 'result', 'dataInput'
   const [questionsData, setQuestionsData] = useState([]);
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
+  // Theme state
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
+
+  const refreshQuestions = () => {
+    const data = loadAllQuestions();
+    setQuestionsData(data);
+  };
 
   useEffect(() => {
     // Load questions on mount
-    const data = loadAllQuestions();
-    setQuestionsData(data);
+    refreshQuestions();
   }, []);
+
+  // Theme support
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   useEffect(() => {
     // Prevent accidental navigation during quiz
@@ -37,9 +56,19 @@ function App() {
   // Extract unique chapters
   const availableChapters = [...new Set(questionsData.map(q => q.chapter))].sort();
 
-  const handleStart = (selectedChapters, questionCount = 20) => {
-    // Filter questions based on selection
-    const questions = questionsData.filter(q => selectedChapters.includes(q.chapter));
+  const handleStart = (selectedChapters, questionCount = 20, isRetryMode = false) => {
+    let questions;
+
+    if (isRetryMode) {
+      // In retry mode, selectedChapters is the array of {id, chapter}
+      const wrongQs = selectedChapters;
+      questions = questionsData.filter(q =>
+        wrongQs.some(wq => wq.id === q.id && wq.chapter === q.chapter)
+      );
+    } else {
+      // Normal mode: Filter questions based on chapter selection
+      questions = questionsData.filter(q => selectedChapters.includes(q.chapter));
+    }
 
     // Shuffle and slice to user selected count (default 20)
     const shuffledQuestions = questions.sort(() => 0.5 - Math.random()).slice(0, questionCount);
@@ -71,7 +100,15 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container" style={{ position: 'relative' }}>
+      <button
+        className="theme-toggle"
+        onClick={toggleTheme}
+        title={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} Mode`}
+      >
+        {theme === 'light' ? '🌙' : '☀️'}
+      </button>
+
       <header style={{ marginBottom: '2rem', textAlign: 'center' }}>
         <h1 onClick={handleLogoClick} style={{ cursor: 'pointer' }}>Exam Question AI</h1>
       </header>
@@ -81,6 +118,17 @@ function App() {
           <StartScreen
             chapters={availableChapters}
             onStart={handleStart}
+            onManageData={() => setStep('dataInput')}
+          />
+        )}
+
+        {step === 'dataInput' && (
+          <DataInputScreen
+            onBack={() => setStep('start')}
+            onSave={() => {
+              refreshQuestions();
+              setStep('start');
+            }}
           />
         )}
 

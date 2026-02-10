@@ -1,114 +1,141 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { saveQuizResult } from '../utils/storage';
 
 export default function ResultScreen({ questions, answers, onRestart }) {
-    const [showExplanation, setShowExplanation] = useState({});
+    const [score, setScore] = useState(0);
+    const [showExplanations, setShowExplanations] = useState({});
 
-    const calculateScore = () => {
+    useEffect(() => {
         let correctCount = 0;
+        const wrongQuestions = [];
+        const correctQuestions = [];
+
         questions.forEach(q => {
             const userAnswer = answers[q.id];
-            // Check if matches the pre-calculated correct answer text
-            // We use the new property _correctAnswerText if available
-            // Fallback to old logic if not (though implementation ensures it should be there)
+            let isCorrect = false;
+
             if (q._correctAnswerText) {
-                if (userAnswer === q._correctAnswerText) {
-                    correctCount++;
-                }
-            } else if (userAnswer && userAnswer.startsWith(q.correctAnswer)) {
-                // Fallback for legacy behavior
+                isCorrect = userAnswer === q._correctAnswerText;
+            } else if (!q._correctAnswerText && userAnswer && userAnswer.startsWith(q.correctAnswer)) {
+                isCorrect = true;
+            }
+
+            if (isCorrect) {
                 correctCount++;
+                correctQuestions.push({ id: q.id, chapter: q.chapter });
+            } else {
+                wrongQuestions.push({ id: q.id, chapter: q.chapter });
             }
         });
-        return correctCount;
+
+        setScore(correctCount);
+
+        saveQuizResult({
+            score: correctCount,
+            total: questions.length,
+            wrongQuestions,
+            correctQuestions
+        });
+
+    }, []); // Run once on mount
+
+    const toggleExplanation = (index) => {
+        setShowExplanations(prev => ({
+            ...prev,
+            [index]: !prev[index]
+        }));
     };
 
-    const score = calculateScore();
     const percentage = Math.round((score / questions.length) * 100);
-
-    const toggleExplanation = (id) => {
-        setShowExplanation(prev => ({ ...prev, [id]: !prev[id] }));
-    };
 
     return (
         <div className="card result-screen">
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>퀴즈 완료!</h2>
+                <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>퀴즈 결과</h2>
                 <div style={{
                     fontSize: '4rem',
                     fontWeight: '800',
-                    color: percentage >= 80 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--error)',
-                    textShadow: '0 0 20px rgba(0,0,0,0.5)'
+                    color: 'var(--primary)',
+                    marginBottom: '0.5rem'
                 }}>
                     {score} / {questions.length}
                 </div>
-                <p style={{ color: 'var(--text-muted)' }}>총 {percentage}% 점수입니다</p>
+                <div style={{
+                    fontSize: '1.25rem',
+                    color: percentage >= 80 ? 'var(--success)' : percentage >= 60 ? 'var(--warning)' : 'var(--error)',
+                    fontWeight: '600'
+                }}>
+                    {percentage >= 60 ? '합격입니다! 🎉' : '불합격입니다 😢'} ({percentage}%)
+                </div>
             </div>
 
             <div className="review-section">
-                <h3 style={{ marginBottom: '1.5rem' }}>오답 노트 & 해설</h3>
+                <h3 style={{ marginBottom: '1.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid var(--glass-border)' }}>
+                    정답 확인
+                </h3>
+
                 <div style={{ display: 'grid', gap: '1.5rem' }}>
                     {questions.map((q, index) => {
                         const userAnswer = answers[q.id];
-                        let isCorrect = false;
-                        if (q._correctAnswerText) {
-                            isCorrect = userAnswer === q._correctAnswerText;
-                        } else {
-                            isCorrect = userAnswer && userAnswer.startsWith(q.correctAnswer);
-                        }
+                        // Logic to check correctness
+                        const isCorrect = userAnswer === q._correctAnswerText ||
+                            (!q._correctAnswerText && userAnswer && userAnswer.startsWith(q.correctAnswer));
 
                         return (
-                            <div key={q.id} style={{
-                                background: 'rgba(255,255,255,0.03)',
-                                borderRadius: 'var(--radius-md)',
+                            <div key={index} style={{
                                 padding: '1.5rem',
-                                borderLeft: `4px solid ${isCorrect ? 'var(--success)' : 'var(--error)'}`
+                                borderRadius: 'var(--radius-md)',
+                                border: `1px solid ${isCorrect ? 'var(--success)' : 'var(--error)'}`,
+                                background: isCorrect ? 'var(--bg-color)' : 'rgba(220, 53, 69, 0.05)',
+                                boxShadow: 'var(--glass-shadow)'
                             }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-                                    <div>
-                                        <span style={{
-                                            display: 'inline-block',
-                                            background: isCorrect ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.2)',
-                                            color: isCorrect ? 'var(--success)' : 'var(--error)',
-                                            padding: '0.25rem 0.75rem',
-                                            borderRadius: '99px',
-                                            fontSize: '0.8rem',
-                                            fontWeight: '700',
-                                            marginBottom: '0.5rem'
-                                        }}>
-                                            {isCorrect ? '정답' : '오답'}
-                                        </span>
-                                        <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>{index + 1}. {q.question}</h4>
-                                    </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                                    <span style={{ fontWeight: 'bold', color: 'var(--text-muted)' }}>문제 {index + 1}</span>
+                                    <span style={{
+                                        fontWeight: 'bold',
+                                        color: isCorrect ? 'var(--success)' : 'var(--error)'
+                                    }}>
+                                        {isCorrect ? '정답' : '오답'}
+                                    </span>
                                 </div>
+                                <p style={{ marginBottom: '1rem', fontSize: '1.1rem', fontWeight: '500' }}>{q.question}</p>
 
-                                <div style={{ marginBottom: '1rem', color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-                                    <p>내가 고른 답: <span style={{ color: isCorrect ? 'var(--success)' : 'var(--error)', fontWeight: '600' }}>{userAnswer}</span></p>
-                                    {!isCorrect && <p>정답: <span style={{ color: 'var(--success)', fontWeight: '600' }}>{q._correctAnswerText || q.options.find(o => o.startsWith(q.correctAnswer))}</span></p>}
+                                <div style={{ display: 'grid', gap: '0.5rem', marginBottom: '1rem', fontSize: '0.95rem' }}>
+                                    <div style={{ color: isCorrect ? 'var(--success)' : 'var(--error)' }}>
+                                        <strong>내가 고른 답:</strong> {userAnswer || '선택하지 않음'}
+                                    </div>
+                                    {!isCorrect && (
+                                        <div style={{ color: 'var(--success)' }}>
+                                            <strong>정답:</strong> {q._correctAnswerText || q.options.find(opt => opt.startsWith(q.correctAnswer)) || q.correctAnswer}
+                                        </div>
+                                    )}
                                 </div>
 
                                 <button
-                                    onClick={() => toggleExplanation(q.id)}
+                                    onClick={() => toggleExplanation(index)}
+                                    className="btn-outline"
                                     style={{
-                                        background: 'transparent',
-                                        color: 'var(--primary-light)',
                                         fontSize: '0.9rem',
-                                        padding: 0,
-                                        textDecoration: 'underline'
+                                        padding: '0.5rem 1rem',
+                                        borderColor: 'var(--surface-highlight)',
+                                        color: 'var(--text-muted)'
                                     }}
                                 >
-                                    {showExplanation[q.id] ? '해설 닫기' : '해설 보기'}
+                                    {showExplanations[index] ? '해설 닫기' : '해설 보기'}
                                 </button>
 
-                                {showExplanation[q.id] && (
+                                {showExplanations[index] && (
                                     <div style={{
                                         marginTop: '1rem',
                                         padding: '1rem',
-                                        background: 'rgba(0,0,0,0.2)',
+                                        background: 'var(--surface-highlight)',
                                         borderRadius: 'var(--radius-sm)',
                                         fontSize: '0.95rem',
-                                        lineHeight: '1.5'
+                                        lineHeight: '1.6',
+                                        color: 'var(--text-main)'
                                     }}>
-                                        <strong>해설:</strong> {q.explanation}
+                                        <strong>해설:</strong>
+                                        <div style={{ marginTop: '0.5rem' }}>{q.explanation}</div>
                                     </div>
                                 )}
                             </div>
@@ -117,13 +144,13 @@ export default function ResultScreen({ questions, answers, onRestart }) {
                 </div>
             </div>
 
-            <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+            <div style={{ marginTop: '3rem', textAlign: 'center' }}>
                 <button
                     className="btn-primary"
                     onClick={onRestart}
-                    style={{ minWidth: '200px' }}
+                    style={{ fontSize: '1.1rem', padding: '1rem 3rem' }}
                 >
-                    다시 풀기
+                    홈으로 돌아가기
                 </button>
             </div>
         </div>

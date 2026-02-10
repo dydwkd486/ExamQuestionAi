@@ -1,16 +1,63 @@
-# React + Vite
+# Exam Question AI (수험생 퀴즈 플랫폼)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+다양한 주제의 객관식 문제를 풀고 학습할 수 있는 웹 기반 퀴즈 플랫폼입니다.  
+사용자는 원하는 단원과 문제 수를 선택하여 학습을 진행할 수 있으며, 랜덤화된 보기와 즉각적인 피드백을 통해 효율적인 학습이 가능합니다.
 
-Currently, two official plugins are available:
+🔗 **배포 사이트**: [https://dydwkd486.github.io/ExamQuestionAi/](https://dydwkd486.github.io/ExamQuestionAi/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ 주요 기능
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. 맞춤형 퀴즈 설정
+*   **단원 선택**: Python, 역사, 상식, 프롬프트 엔지니어링 등 원하는 주제를 다중 선택할 수 있습니다.
+*   **문제 수 조절**: 슬라이더를 통해 **5문제 ~ 20문제**까지 풀고 싶은 문제의 개수를 설정할 수 있습니다.
+*   **편리한 UI**: 단원 목록이 자동으로 가나다순 정렬되어 찾기 쉽습니다.
 
-## Expanding the ESLint configuration
+### 2. 스마트 학습 시스템
+*   **랜덤 보기 (Shuffle)**: 퀴즈를 풀 때마다 객관식 보기(1~5번)의 순서가 무작위로 섞입니다. 
+    *   번호만 외우는 식의 편법 학습을 방지하고 진짜 실력을 키울 수 있습니다.
+*   **오답 방지**: 실수로 뒤로가기나 새로고침을 누를 경우, 진행 상황이 초기화됨을 알리는 경고창이 뜹니다.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 3. 결과 및 복습
+*   **상세한 결과**: 퀴즈 종료 후 점수와 백분율을 즉시 확인할 수 있습니다.
+*   **오답 노트**: 틀린 문제와 맞춘 문제를 구분하여 보여주며, 각 문제에 대한 **상세 해설**을 제공합니다.
+*   **지도 기능**: 문제를 푸는 도중 전체 문항 지도를 열어 원하는 문제로 건너뛰거나 현재 풀이 현황을 볼 수 있습니다.
+
+---
+
+## 🚀 사용 방법
+
+1.  **접속**: [배포 사이트 링크](https://dydwkd486.github.io/ExamQuestionAi/)를 클릭하여 접속합니다.
+2.  **설정**:
+    *   학습하고 싶은 **단원(챕터)**을 선택합니다. (전체 선택 가능)
+    *   화면 하단의 슬라이더를 조절하여 **문제 수**를 선택합니다.
+3.  **퀴즈 풀기**:
+    *   문제를 읽고 정답을 선택합니다.
+    *   '다음 문제' 버튼을 눌러 진행합니다.
+    *   '전체 지도' 버튼을 활용해 문제를 건너뛰거나 되돌아갈 수 있습니다.
+4.  **결과 확인**:
+    *   마지막 문제를 풀고 '결과 보기'를 누르면 채점 결과가 나옵니다.
+    *   오답 노트와 해설을 읽으며 복습합니다.
+    *   '다시 풀기' 버튼으로 초기 화면으로 돌아갈 수 있습니다.
+
+---
+
+## 🛠️ 기술 스택
+
+*   **Frontend**: React, Javascript
+*   **Build Tool**: Vite
+*   **Styling**: Vanilla CSS (CSS Variables)
+*   **Deployment**: GitHub Pages
+
+---
+
+## 📂 프로젝트 구조
+
+```
+src/
+├── components/      # UI 컴포넌트 (StartScreen, QuizScreen, ResultScreen)
+├── data/           # 문제 데이터 (JSON 파일)
+├── utils/          # 유틸리티 함수 (문제 로더, 셔플 로직)
+└── App.jsx         # 메인 애플리케이션 로직
+```
